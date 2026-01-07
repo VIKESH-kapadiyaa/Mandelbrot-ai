@@ -7,6 +7,7 @@ import { Process } from "./components/Process";
 import { ScrollVideo } from "./components/ScrollProgress";
 import { ChatWidget } from "./components/ChatWidget";
 import { BookingModal } from "./components/BookingModal";
+import { Architecture } from "./components/Architecture";
 import { AnimatePresence, motion } from "framer-motion";
 
 const App = () => {
@@ -58,13 +59,15 @@ const App = () => {
               </button>
             </nav>
 
-            <Hero />
+            <Hero setIsBookingOpen={setIsBookingOpen} />
             <div className="h-20" /> {/* Spacer */}
             <Services />
             <div className="h-20" /> {/* Spacer */}
             {/* Process Section can be added here as a separate component */}
             {/* Process Section */}
             <Process />
+
+            <Architecture />
 
             <Pricing />
             <Footer />

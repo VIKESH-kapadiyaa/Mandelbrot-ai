@@ -65,7 +65,7 @@ const ScrambleText = ({ text, className }) => {
     return <span className={className}>{display}</span>;
 };
 
-export const Hero = () => {
+export const Hero = ({ setIsBookingOpen }) => {
     const containerRef = useRef(null);
 
     // Mouse interaction for 3D Tilt
@@ -168,16 +168,22 @@ export const Hero = () => {
                     transition={{ delay: 1.2 }}
                     className="flex flex-col sm:flex-row items-center justify-center gap-8"
                 >
-                    <button className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none clip-path-slant hover:bg-cyan-400 transition-all overflow-hidden">
+                    <button
+                        onClick={() => setIsBookingOpen(true)}
+                        className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none clip-path-slant hover:bg-cyan-400 transition-all overflow-hidden"
+                    >
                         <div className="absolute inset-0 bg-white/50 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out skew-x-12" />
                         <span className="relative z-10 flex items-center justify-center gap-2">
-                            Initialize <span className="text-lg">→</span>
+                            INITIALIZE SYSTEM
                         </span>
                     </button>
 
-                    <button className="group relative w-64 h-16 border border-white/20 hover:border-cyan-500/50 text-white font-bold uppercase tracking-[0.2em] transition-all bg-black/50 backdrop-blur-sm">
+                    <button
+                        onClick={() => window.location.href = '#architecture'}
+                        className="group relative w-64 h-16 border border-white/20 hover:border-cyan-500/50 text-white font-bold uppercase tracking-[0.2em] transition-all bg-black/50 backdrop-blur-sm"
+                    >
                         <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <span className="relative z-10 text-xs">View Protocols</span>
+                        <span className="relative z-10 text-xs">VIEW ARCHITECTURE</span>
                     </button>
                 </motion.div>
 
