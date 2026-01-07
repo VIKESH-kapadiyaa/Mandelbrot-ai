@@ -7,8 +7,6 @@ import { Process } from "./components/Process";
 import { ScrollVideo } from "./components/ScrollProgress";
 import { ChatWidget } from "./components/ChatWidget";
 import { BookingModal } from "./components/BookingModal";
-import { Partners } from "./components/Partners";
-import { Testimonials } from "./components/Testimonials";
 import { AnimatePresence, motion } from "framer-motion";
 
 const App = () => {
@@ -61,15 +59,12 @@ const App = () => {
             </nav>
 
             <Hero />
-            <Partners />
             <div className="h-20" /> {/* Spacer */}
             <Services />
             <div className="h-20" /> {/* Spacer */}
             {/* Process Section can be added here as a separate component */}
             {/* Process Section */}
             <Process />
-
-            <Testimonials />
 
             <Pricing />
             <Footer />
