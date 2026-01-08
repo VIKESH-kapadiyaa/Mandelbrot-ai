@@ -91,7 +91,7 @@ export const Pricing = () => {
                         ₹50,000 <span className="text-lg font-normal text-slate-400">upto</span>
                     </div>
                     <div className="text-sm font-mono text-cyan-500 mb-6 flex items-center gap-2">
-                        + ₹30,000 / monthly <span className="text-slate-500">upto</span>
+                        + ₹40,000 / monthly <span className="text-slate-500">upto</span>
                     </div>
 
                     <p className="text-slate-300 text-sm mb-8 leading-relaxed border-b border-white/10 pb-8">
