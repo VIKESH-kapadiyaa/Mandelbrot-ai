@@ -8,6 +8,43 @@ const CheckIcon = ({ className }) => (
 
 export const Pricing = () => {
 
+    const handlePayment = (amount, planName) => {
+        if (!window.Razorpay) {
+            alert("Razorpay SDK failed to load. Please check your connection.");
+            return;
+        }
+
+        const options = {
+            key: "rzp_live_S2xIe19HV2XR7C", // Live API Key
+            amount: amount, // Amount in paise
+            currency: "INR",
+            name: "Aether AI",
+            description: `Payment for ${planName}`,
+            image: "https://via.placeholder.com/150?text=Aether+AI", // Replace with actual logo URL if available
+            handler: function (response) {
+                alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
+                // Verify payment on backend here if needed
+            },
+            prefill: {
+                name: "",
+                email: "",
+                contact: ""
+            },
+            notes: {
+                address: "Aether AI HQ"
+            },
+            theme: {
+                color: "#22d3ee" // Cyan brand color
+            }
+        };
+
+        const rzp1 = new window.Razorpay(options);
+        rzp1.on('payment.failed', function (response) {
+            alert(`Payment Failed: ${response.error.description}`);
+        });
+        rzp1.open();
+    };
+
     return (
         <section className="py-40 px-6 bg-black relative overflow-hidden" id="pricing">
             <div className="max-w-7xl mx-auto text-center mb-24 relative z-10">
@@ -66,7 +103,10 @@ export const Pricing = () => {
                         </li>
                     </ul>
 
-                    <button className="w-full py-4 border border-white/10 hover:bg-white/10 rounded-xl font-bold uppercase tracking-widest text-xs transition-colors mt-auto">
+                    <button
+                        onClick={() => handlePayment(3000000, "Solo Founder Protocol")}
+                        className="w-full py-4 border border-white/10 hover:bg-white/10 rounded-xl font-bold uppercase tracking-widest text-xs transition-colors mt-auto"
+                    >
                         Deploy Solo
                     </button>
                 </motion.div>
@@ -124,7 +164,10 @@ export const Pricing = () => {
                         </li>
                     </ul>
 
-                    <button className="relative z-10 w-full py-5 bg-white text-black rounded-xl font-black uppercase tracking-widest text-xs hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-shadow mt-auto">
+                    <button
+                        onClick={() => handlePayment(5000000, "Company Systems Protocol")}
+                        className="relative z-10 w-full py-5 bg-white text-black rounded-xl font-black uppercase tracking-widest text-xs hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] transition-shadow mt-auto"
+                    >
                         Initialize Business
                     </button>
                 </motion.div>
@@ -165,7 +208,10 @@ export const Pricing = () => {
                         </li>
                     </ul>
 
-                    <button className="w-full py-4 border border-white/10 hover:bg-white/10 rounded-xl font-bold uppercase tracking-widest text-xs transition-colors mt-auto">
+                    <button
+                        onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')}
+                        className="w-full py-4 border border-white/10 hover:bg-white/10 rounded-xl font-bold uppercase tracking-widest text-xs transition-colors mt-auto"
+                    >
                         Contact Sales
                     </button>
                 </motion.div>
