@@ -169,7 +169,7 @@ export const Hero = ({ setIsBookingOpen }) => {
                     className="flex flex-col sm:flex-row items-center justify-center gap-8"
                 >
                     <button
-                        onClick={() => setIsBookingOpen(true)}
+                        onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')}
                         className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none clip-path-slant hover:bg-cyan-400 transition-all overflow-hidden"
                     >
                         <div className="absolute inset-0 bg-white/50 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out skew-x-12" />
