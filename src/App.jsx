@@ -11,6 +11,7 @@ import { Architecture } from "./components/Architecture";
 import { Work } from "./components/Work";
 import AntigravityBackground from "./components/AntigravityBackground";
 import { AnimatePresence, motion } from "framer-motion";
+import RevealOnScroll from "./components/RevealOnScroll";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -62,9 +63,15 @@ const App = () => {
               </button>
             </nav>
 
-            <Hero setIsBookingOpen={setIsBookingOpen} />
+            <RevealOnScroll direction="up" delay={0.2}>
+              <Hero setIsBookingOpen={setIsBookingOpen} />
+            </RevealOnScroll>
+
             <div className="h-20" /> {/* Spacer */}
-            <Services />
+
+            <RevealOnScroll direction="up" delay={0.1}>
+              <Services />
+            </RevealOnScroll>
             <div className="h-20" /> {/* Spacer */}
             {/* Process Section can be added here as a separate component */}
             {/* Process Section */}
@@ -76,8 +83,14 @@ const App = () => {
             <Work />
 
             <div className="h-20" /> {/* Spacer */}
-            <Pricing />
-            <Footer />
+
+            <RevealOnScroll direction="up" delay={0.1}>
+              <Pricing />
+            </RevealOnScroll>
+
+            <RevealOnScroll direction="up" delay={0.1}>
+              <Footer />
+            </RevealOnScroll>
             <ChatWidget />
             <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
           </main>

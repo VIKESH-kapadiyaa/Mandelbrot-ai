@@ -4,6 +4,7 @@ import { WorkCard } from './WorkCard';
 import { PokerDeck } from './PokerDeck';
 import { WorkDetail } from './WorkDetail';
 import { workProjects } from '../data/workData';
+import ParallaxSection from './ParallaxSection';
 
 export const Work = () => {
     const [selectedProject, setSelectedProject] = useState(null);
@@ -32,13 +33,19 @@ export const Work = () => {
         <section className="relative min-h-screen py-20 bg-transparent overflow-hidden" id="work">
             {/* Animated Gradient Background */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-500/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+                <ParallaxSection offset={100} className="absolute top-0 left-1/4">
+                    <div className="w-96 h-96 bg-purple-500/20 rounded-full blur-[120px] animate-pulse" />
+                </ParallaxSection>
+                <ParallaxSection offset={-150} className="absolute bottom-0 right-1/4">
+                    <div className="w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+                </ParallaxSection>
+                <ParallaxSection offset={50} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div className="w-96 h-96 bg-pink-500/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+                </ParallaxSection>
             </div>
 
             {/* Grid Pattern Overlay */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)] pointer-events-none" />
 
             {/* Main Content */}
             <div className="relative z-10">
