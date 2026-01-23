@@ -170,7 +170,8 @@ export const Hero = ({ setIsBookingOpen }) => {
                 >
                     <button
                         onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')}
-                        className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none clip-path-slant hover:bg-cyan-400 transition-all overflow-hidden"
+                        className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none hover:bg-cyan-400 transition-all overflow-hidden"
+                        style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%)' }}
                     >
                         <div className="absolute inset-0 bg-white/50 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out skew-x-12" />
                         <span className="relative z-10 flex items-center justify-center gap-2">
@@ -188,12 +189,6 @@ export const Hero = ({ setIsBookingOpen }) => {
                 </motion.div>
 
             </motion.div>
-
-            <style jsx>{`
-        .clip-path-slant {
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
-        }
-      `}</style>
         </section>
     );
 };
