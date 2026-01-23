@@ -15,12 +15,12 @@ const AntigravityBackground = () => {
         let mouseSpeed = 0;
 
         // Configuration
-        const particleCount = 190;
+        const particleCount = 100;
         const blobRadius = 100;
         const ease = 0.12;
 
         // Tail Configuration
-        const tailLength = 8;
+        const tailLength = 12;
         const tailGravity = 3; // Pixels down per frame of lag
 
         class Particle {
@@ -54,11 +54,13 @@ const AntigravityBackground = () => {
                     }
                     // Tail Style
                     ctx.strokeStyle = this.color;
-                    ctx.globalAlpha = 0.7; // More visible
+                    ctx.globalAlpha = 0.5; // Faint tail
                     ctx.lineWidth = 2; // Thicker
                     ctx.stroke();
-                    ctx.globalAlpha = 1.0; // Reset
                 }
+
+                // Particle Body Opacity
+                ctx.globalAlpha = 0.4;
 
                 ctx.setTransform(Math.cos(this.rotation), Math.sin(this.rotation), -Math.sin(this.rotation), Math.cos(this.rotation), this.x, this.y);
                 ctx.fillStyle = this.color;
