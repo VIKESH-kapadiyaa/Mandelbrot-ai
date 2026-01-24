@@ -21,7 +21,9 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { useLanguage } from "./context/LanguageContext";
 import { useUISound } from "./hooks/useUISound";
 import { StatusDashboard } from "./components/StatusDashboard";
+import { StatusDashboard } from "./components/StatusDashboard";
 import { HelmetProvider } from 'react-helmet-async';
+import MobileDock from "./components/MobileDock";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -106,7 +108,9 @@ const App = () => {
               </nav>
 
               <RevealOnScroll direction="up" delay={0.2}>
-                <Hero setIsBookingOpen={setIsBookingOpen} setIsDashboardOpen={setIsDashboardOpen} />
+                <section id="hero" className="snap-start">
+                  <Hero setIsBookingOpen={setIsBookingOpen} setIsDashboardOpen={setIsDashboardOpen} />
+                </section>
               </RevealOnScroll>
 
               <div className="h-20" /> {/* Spacer */}
@@ -115,7 +119,9 @@ const App = () => {
 
               <Suspense fallback={<SectionLoader />}>
                 <RevealOnScroll direction="up" delay={0.1}>
-                  <Services />
+                  <section id="services" className="snap-start">
+                    <Services />
+                  </section>
                 </RevealOnScroll>
               </Suspense>
               <div className="h-20" /> {/* Spacer */}
@@ -143,15 +149,18 @@ const App = () => {
               <div className="h-20" /> {/* Spacer */}
               <Suspense fallback={<SectionLoader />}>
                 <RevealOnScroll direction="up" delay={0.1}>
-                  <Work />
+                  <section id="work" className="snap-start">
+                    <Work />
+                  </section>
                 </RevealOnScroll>
               </Suspense>
 
-              <div className="h-40" /> {/* Spacer */}
-              <div className="h-40" /> {/* Spacer */}
+              <div className="h-20" /> {/* Spacer */}
               <Suspense fallback={<SectionLoader />}>
                 <RevealOnScroll direction="up" delay={0.1}>
-                  <Pricing />
+                  <section id="pricing" className="snap-start">
+                    <Pricing />
+                  </section>
                 </RevealOnScroll>
               </Suspense>
 
@@ -165,6 +174,7 @@ const App = () => {
               <AnimatePresence>
                 {isDashboardOpen && <StatusDashboard onClose={() => setIsDashboardOpen(false)} />}
               </AnimatePresence>
+              <MobileDock />
             </main>
           )}
         </AnimatePresence>

@@ -15,7 +15,7 @@ const AntigravityBackground = () => {
         let mouseSpeed = 0;
 
         // Configuration
-        const particleCount = 100;
+        const particleCount = window.innerWidth < 768 ? 40 : 100;
         const blobRadius = 100;
         const ease = 0.12;
 
