@@ -15,6 +15,7 @@ const Footer = lazy(() => import("./components/Footer").then(module => ({ defaul
 const Process = lazy(() => import("./components/Process").then(module => ({ default: module.Process })));
 const Architecture = lazy(() => import("./components/Architecture").then(module => ({ default: module.Architecture })));
 const Work = lazy(() => import("./components/Work").then(module => ({ default: module.Work })));
+const Testimonials = lazy(() => import("./components/Testimonials").then(module => ({ default: module.Testimonials })));
 
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -111,6 +112,12 @@ const App = () => {
               <Suspense fallback={<SectionLoader />}>
                 <RevealOnScroll direction="up" delay={0.1}>
                   <Architecture />
+                </RevealOnScroll>
+              </Suspense>
+
+              <Suspense fallback={<SectionLoader />}>
+                <RevealOnScroll direction="up" delay={0.1}>
+                  <Testimonials />
                 </RevealOnScroll>
               </Suspense>
 

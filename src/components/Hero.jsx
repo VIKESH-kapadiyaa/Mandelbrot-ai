@@ -150,54 +150,50 @@ export const Hero = ({ setIsBookingOpen }) => {
                             transition={{ delay: 0.5 }}
                             className="flex items-center justify-center gap-4 md:gap-12 w-full"
                         >
-                            <span className="text-4xl md:text-[60px] font-light italic text-cyan-500/80 font-mono tracking-widest opacity-80">
-                                THE
-                            </span>
                             <span className="bg-white text-black px-4 md:px-8 transform -skew-x-12 inline-block">
                                 FUTURE
                             </span>
                         </motion.div>
                     </h1>
+
+                    {/* Description */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1 }}
+                        className="max-w-2xl mx-auto text-lg md:text-2xl text-slate-400 font-light leading-relaxed mb-20"
+                    >
+                        Constructing autonomous digital architectures for the <span className="text-white font-medium">post-labor economy</span>.
+                    </motion.p>
+
+                    {/* CTA Buttons */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 1.2 }}
+                        className="flex flex-col sm:flex-row items-center justify-center gap-8"
+                    >
+                        <button
+                            onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')}
+                            className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none hover:bg-cyan-400 transition-all overflow-hidden"
+                            style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%)' }}
+                        >
+                            <div className="absolute inset-0 bg-white/50 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out skew-x-12" />
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                                INITIALIZE SYSTEM
+                            </span>
+                        </button>
+
+                        <button
+                            onClick={() => window.location.href = '#architecture'}
+                            className="group relative w-64 h-16 border border-white/20 hover:border-cyan-500/50 text-white font-bold uppercase tracking-[0.2em] transition-all bg-black/50 backdrop-blur-sm"
+                        >
+                            <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            <span className="relative z-10 text-xs">VIEW ARCHITECTURE</span>
+                        </button>
+                    </motion.div>
                 </div>
-
-                {/* Description */}
-                <motion.p
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1 }}
-                    className="max-w-2xl mx-auto text-lg md:text-2xl text-slate-400 font-light leading-relaxed mb-20"
-                >
-                    Constructing autonomous digital architectures for the <span className="text-white font-medium">post-labor economy</span>.
-                </motion.p>
-
-                {/* CTA Buttons */}
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.2 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-8"
-                >
-                    <button
-                        onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')}
-                        className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none hover:bg-cyan-400 transition-all overflow-hidden"
-                        style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%)' }}
-                    >
-                        <div className="absolute inset-0 bg-white/50 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out skew-x-12" />
-                        <span className="relative z-10 flex items-center justify-center gap-2">
-                            INITIALIZE SYSTEM
-                        </span>
-                    </button>
-
-                    <button
-                        onClick={() => window.location.href = '#architecture'}
-                        className="group relative w-64 h-16 border border-white/20 hover:border-cyan-500/50 text-white font-bold uppercase tracking-[0.2em] transition-all bg-black/50 backdrop-blur-sm"
-                    >
-                        <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <span className="relative z-10 text-xs">VIEW ARCHITECTURE</span>
-                    </button>
-                </motion.div>
-
-            </motion.div>
-        </section>
+            </motion.div >
+        </section >
     );
 };

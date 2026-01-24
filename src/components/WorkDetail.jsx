@@ -1,11 +1,38 @@
 import { motion } from 'framer-motion';
 import { X, ArrowLeft } from 'lucide-react';
 import { AgentSandbox } from './AgentSandbox';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { SEO } from './SEO';
+import { workProjects } from '../data/workData';
+import { WorkCard } from './WorkCard';
 
-export const WorkDetail = ({ project, onClose }) => {
+export const WorkDetail = ({ project, onClose, onSwitchProject }) => {
     if (!project) return null;
+
+    // Find related projects based on category or random fallback
+    const relatedProjects = useMemo(() => {
+        let related = workProjects.filter(p => p.id !== project.id && p.category === project.category);
+
+        // If not enough related projects by category, fill with random others
+        if (related.length < 2) {
+            const others = workProjects.filter(p => p.id !== project.id && p.category !== project.category);
+            related = [...related, ...others].slice(0, 3);
+        } else {
+            related = related.slice(0, 3);
+        }
+        return related;
+    }, [project]);
+
+    const handleRelatedClick = (newProject) => {
+        // Since we are inside the detail view, we likely want to switch the view
+        // Ideally, we lift this state up or call a prop to switch the active project
+        // For now, we will close and let the parent handle it, OR we need the parent to pass a setter.
+        // Given the current architecture in Work.jsx, checking if we can switch directly would be better.
+        // However, Work.jsx controls the `selectedProject`.
+        // We will call `onClose` then maybe trigger a selection? 
+        // Actually, passing a `onProjectSelect` prop would be cleaner.
+        // For this step, I will modify Work.jsx to pass `setSelectedProject` as `onSwitchProject`.
+    };
 
     // Disable body scroll and hide fixed elements when detail page is open
     useEffect(() => {
@@ -214,6 +241,29 @@ export const WorkDetail = ({ project, onClose }) => {
                             </p>
                         </div>
                     </motion.div>
+                    {/* Related Projects Section */}
+                    <div className="mt-20 border-t border-white/10 pt-16">
+                        <h3 className="text-2xl font-black text-white mb-8">Related Agents</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            {relatedProjects.map((related) => (
+                                <div key={related.id} className="h-80">
+                                    <WorkCard
+                                        project={related}
+                                        onClick={(p) => {
+                                            // Ensure scrolling to top when switching
+                                            const detailContainer = document.querySelector('.overflow-y-auto');
+                                            if (detailContainer) detailContainer.scrollTo({ top: 0, behavior: 'smooth' });
+                                            // We need a way to switch project. 
+                                            // The simplest way without changing prop drilling too much 
+                                            // is to define onSwitchProject in Work.jsx and pass it down.
+                                            // See next edit.
+                                            if (onSwitchProject) onSwitchProject(p);
+                                        }}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
         </motion.div>
