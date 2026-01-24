@@ -2,6 +2,8 @@ import { useRef, useState, useEffect } from "react";
 
 import { motion, useMotionValue } from "framer-motion";
 import ParallaxSection from './ParallaxSection';
+import { useLanguage } from "../context/LanguageContext";
+import { useUISound } from "../hooks/useUISound";
 
 // Matrix raining characters effect background
 const MatrixBackground = () => {
@@ -69,6 +71,8 @@ const ScrambleText = ({ text, className }) => {
 
 export const Hero = ({ setIsBookingOpen }) => {
     const containerRef = useRef(null);
+    const { t } = useLanguage();
+    const { playClick, playHover } = useUISound();
 
     // Mouse interaction for 3D Tilt
     const mouseX = useMotionValue(0);
@@ -134,7 +138,7 @@ export const Hero = ({ setIsBookingOpen }) => {
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500 shadow-[0_0_10px_#22d3ee]"></span>
                     </div>
                     <span className="text-xs font-mono font-bold tracking-[0.3em] uppercase text-cyan-400">
-                        Neural Network Active
+                        {t('hero.status').toUpperCase()}
                     </span>
                 </motion.div>
 
@@ -150,8 +154,11 @@ export const Hero = ({ setIsBookingOpen }) => {
                             transition={{ delay: 0.5 }}
                             className="flex items-center justify-center gap-4 md:gap-12 w-full"
                         >
+                            <span className="text-4xl md:text-[60px] font-light italic text-cyan-500/80 font-mono tracking-widest opacity-80">
+                                {t('hero.title_prefix')}
+                            </span>
                             <span className="bg-white text-black px-4 md:px-8 transform -skew-x-12 inline-block">
-                                FUTURE
+                                {t('hero.title_future')}
                             </span>
                         </motion.div>
                     </h1>
@@ -163,7 +170,7 @@ export const Hero = ({ setIsBookingOpen }) => {
                         transition={{ delay: 1 }}
                         className="max-w-2xl mx-auto text-lg md:text-2xl text-slate-400 font-light leading-relaxed mb-20"
                     >
-                        Constructing autonomous digital architectures for the <span className="text-white font-medium">post-labor economy</span>.
+                        {t('hero.desc_part1')} <span className="text-white font-medium">{t('hero.desc_part2')}</span>.
                     </motion.p>
 
                     {/* CTA Buttons */}
@@ -174,22 +181,30 @@ export const Hero = ({ setIsBookingOpen }) => {
                         className="flex flex-col sm:flex-row items-center justify-center gap-8"
                     >
                         <button
-                            onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')}
+                            onClick={() => {
+                                playClick();
+                                window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank');
+                            }}
+                            onMouseEnter={playHover}
                             className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none hover:bg-cyan-400 transition-all overflow-hidden"
                             style={{ clipPath: 'polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%)' }}
                         >
                             <div className="absolute inset-0 bg-white/50 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out skew-x-12" />
                             <span className="relative z-10 flex items-center justify-center gap-2">
-                                INITIALIZE SYSTEM
+                                {t('hero.cta_init')}
                             </span>
                         </button>
 
                         <button
-                            onClick={() => window.location.href = '#architecture'}
+                            onClick={() => {
+                                playClick();
+                                window.location.href = '#architecture';
+                            }}
+                            onMouseEnter={playHover}
                             className="group relative w-64 h-16 border border-white/20 hover:border-cyan-500/50 text-white font-bold uppercase tracking-[0.2em] transition-all bg-black/50 backdrop-blur-sm"
                         >
                             <div className="absolute inset-0 bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            <span className="relative z-10 text-xs">VIEW ARCHITECTURE</span>
+                            <span className="relative z-10 text-xs">{t('hero.cta_view')}</span>
                         </button>
                     </motion.div>
                 </div>

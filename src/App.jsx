@@ -17,11 +17,16 @@ const Architecture = lazy(() => import("./components/Architecture").then(module 
 const Work = lazy(() => import("./components/Work").then(module => ({ default: module.Work })));
 const Testimonials = lazy(() => import("./components/Testimonials").then(module => ({ default: module.Testimonials })));
 
+import { LanguageSwitcher } from "./components/LanguageSwitcher";
+import { useLanguage } from "./context/LanguageContext";
+import { useUISound } from "./hooks/useUISound";
 import { HelmetProvider } from 'react-helmet-async';
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const { t } = useLanguage();
+  const { playClick, playHover } = useUISound();
 
   useEffect(() => {
     // Simulate initial system boot
@@ -71,20 +76,31 @@ const App = () => {
                   className="flex items-center gap-3 pointer-events-auto cursor-pointer"
                   role="button"
                   tabIndex={0}
-                  aria-label="Aether AI Home"
+                  aria-label={t('nav.home')}
                   onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  onClick={() => {
+                    playClick();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  onMouseEnter={playHover}
                 >
                   <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black" aria-hidden="true">A</div>
-                  <span className="font-bold tracking-widest hidden md:block">AETHER AI</span>
+                  <span className="font-bold tracking-widest hidden md:block">{t('nav.home').toUpperCase()}</span>
                 </div>
-                <button
-                  onClick={() => window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank')}
-                  className="pointer-events-auto px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors"
-                  aria-label="Book a call with Aether AI agents"
-                >
-                  Book Call
-                </button>
+                <div className="flex items-center gap-4">
+                  <LanguageSwitcher />
+                  <button
+                    onClick={() => {
+                      playClick();
+                      window.open('https://atherai2026.app.n8n.cloud/form/e7216e1d-645f-4fbc-8df6-5dd4c0318e87', '_blank');
+                    }}
+                    onMouseEnter={playHover}
+                    className="pointer-events-auto px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors"
+                    aria-label="Book a call with Aether AI agents"
+                  >
+                    {t('nav.book')}
+                  </button>
+                </div>
               </nav>
 
               <RevealOnScroll direction="up" delay={0.2}>
