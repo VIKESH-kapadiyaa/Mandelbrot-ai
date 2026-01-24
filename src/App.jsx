@@ -21,7 +21,7 @@ import { LanguageSwitcher } from "./components/LanguageSwitcher";
 import { useLanguage } from "./context/LanguageContext";
 import { useUISound } from "./hooks/useUISound";
 import { StatusDashboard } from "./components/StatusDashboard";
-import { StatusDashboard } from "./components/StatusDashboard";
+
 import { HelmetProvider } from 'react-helmet-async';
 import MobileDock from "./components/MobileDock";
 
