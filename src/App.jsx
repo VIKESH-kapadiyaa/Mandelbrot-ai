@@ -32,6 +32,13 @@ const App = () => {
   const { t } = useLanguage();
   const { playClick, playHover } = useUISound();
 
+  // Global Click Sound
+  useEffect(() => {
+    const handleGlobalClick = () => playClick();
+    window.addEventListener('click', handleGlobalClick);
+    return () => window.removeEventListener('click', handleGlobalClick);
+  }, [playClick]);
+
   useEffect(() => {
     // Simulate initial system boot
     setTimeout(() => setIsLoading(false), 2000);

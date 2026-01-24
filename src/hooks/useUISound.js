@@ -1,84 +1,38 @@
-import { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 const SOUND_PATH = '/sound/mixkit-sci-fi-click-900.wav';
 
 export const useUISound = () => {
-    // Track if the user has interacted with the page to avoid "Autoplay" errors on hover
-    const [hasInteracted, setHasInteracted] = useState(false);
+    // We use a ref to keep a master audio object mainly for preloading
+    const masterAudioRef = useRef(new Audio(SOUND_PATH));
 
-    // Refs to hold Audio objects so they aren't recreated on every render
-    const clickAudioRef = useRef(null);
-    const hoverAudioRef = useRef(null);
-
-    useEffect(() => {
-        // Initialize Audio objects
+    // Helper to play sound with "polyphony" (allowing overlapping sounds)
+    const playSound = (volume = 0.5, rate = 1.0) => {
         try {
-            clickAudioRef.current = new Audio(SOUND_PATH);
-            clickAudioRef.current.volume = 0.5;
+            // Clone the node to allow overlapping sounds (e.g. fast clicking)
+            const soundClone = masterAudioRef.current.cloneNode();
+            soundClone.volume = volume;
+            soundClone.playbackRate = rate;
 
-            hoverAudioRef.current = new Audio(SOUND_PATH);
-            hoverAudioRef.current.volume = 0.1;
-            // Native Audio doesn't support "playbackRate" in constructor, set it after
-            hoverAudioRef.current.playbackRate = 2.0;
-            // Note: playbackRate on HTML5 Audio might not work in all browsers perfectly without pitch correction 
-            // but it's worth a try. Ideally we'd valid files for each sound.
+            // Clean up when done (optional but good for memory in long sessions)
+            // soundClone.onended = () => { ... }; 
 
-            // Interaction listener to unlock audio
-            const handleInteraction = () => {
-                setHasInteracted(true);
-                // Optional: Silent play to unlock if needed, but usually clicking is enough
-                window.removeEventListener('click', handleInteraction);
-                window.removeEventListener('keydown', handleInteraction);
-            };
-
-            window.addEventListener('click', handleInteraction);
-            window.addEventListener('keydown', handleInteraction);
-
-            return () => {
-                window.removeEventListener('click', handleInteraction);
-                window.removeEventListener('keydown', handleInteraction);
-            };
-        } catch (e) {
-            console.error("Audio initialization failed:", e);
-        }
-    }, []);
-
-    const playClick = () => {
-        try {
-            if (clickAudioRef.current) {
-                clickAudioRef.current.currentTime = 0; // Reset to start
-                const promise = clickAudioRef.current.play();
-                if (promise !== undefined) {
-                    promise.catch(error => console.error("Click play failed:", error));
-                }
+            const promise = soundClone.play();
+            if (promise !== undefined) {
+                promise.catch(e => {
+                    // Auto-play blocking is common, usually ignored after first interaction
+                    if (e.name !== 'NotAllowedError') {
+                        console.error("Audio play failed", e);
+                    }
+                });
             }
         } catch (e) {
-            console.error("PlayClick execution error:", e);
+            console.error("Audio error", e);
         }
     };
 
-    const playHover = () => {
-        // Only play hover sound if user has interacted (avoid console noise)
-        if (!hasInteracted) return;
-
-        try {
-            if (hoverAudioRef.current) {
-                hoverAudioRef.current.currentTime = 0;
-                hoverAudioRef.current.playbackRate = 2.0; // Ensure rate is set
-                const promise = hoverAudioRef.current.play();
-                if (promise !== undefined) {
-                    promise.catch(error => {
-                        // Ignore "AbortError" which happens if we play/pause quickly (fast hovering)
-                        if (error.name !== 'AbortError') {
-                            console.error("Hover play failed:", error);
-                        }
-                    });
-                }
-            }
-        } catch (e) {
-            console.error("PlayHover execution error:", e);
-        }
-    };
+    const playClick = () => playSound(0.4, 1.0);
+    const playHover = () => playSound(0.1, 2.0); // Higher pitch, lower volume
 
     return { playClick, playHover };
 };
