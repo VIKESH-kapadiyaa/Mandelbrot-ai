@@ -1,34 +1,84 @@
-import useSound from 'use-sound';
+import { useState, useEffect, useRef } from 'react';
 
 const SOUND_PATH = '/sound/mixkit-sci-fi-click-900.wav';
 
 export const useUISound = () => {
-    const [playClick, { error: clickError }] = useSound(SOUND_PATH, {
-        volume: 0.5,
-        onload: () => console.log('Click sound loaded'),
-        onloaderror: (id, err) => console.error('Click sound load error:', err)
-    });
+    // Track if the user has interacted with the page to avoid "Autoplay" errors on hover
+    const [hasInteracted, setHasInteracted] = useState(false);
 
-    const [playHover, { error: hoverError }] = useSound(SOUND_PATH, {
-        volume: 0.1,
-        playbackRate: 4,
-        interrupt: true,
-        onload: () => console.log('Hover sound loaded'),
-        onloaderror: (id, err) => console.error('Hover sound load error:', err)
-    });
+    // Refs to hold Audio objects so they aren't recreated on every render
+    const clickAudioRef = useRef(null);
+    const hoverAudioRef = useRef(null);
 
-    if (clickError) console.error('Click sound error:', clickError);
-    if (hoverError) console.error('Hover sound error:', hoverError);
+    useEffect(() => {
+        // Initialize Audio objects
+        try {
+            clickAudioRef.current = new Audio(SOUND_PATH);
+            clickAudioRef.current.volume = 0.5;
 
-    const wrappedPlayClick = () => {
-        console.log('Attempting to play click sound');
-        playClick();
+            hoverAudioRef.current = new Audio(SOUND_PATH);
+            hoverAudioRef.current.volume = 0.1;
+            // Native Audio doesn't support "playbackRate" in constructor, set it after
+            hoverAudioRef.current.playbackRate = 2.0;
+            // Note: playbackRate on HTML5 Audio might not work in all browsers perfectly without pitch correction 
+            // but it's worth a try. Ideally we'd valid files for each sound.
+
+            // Interaction listener to unlock audio
+            const handleInteraction = () => {
+                setHasInteracted(true);
+                // Optional: Silent play to unlock if needed, but usually clicking is enough
+                window.removeEventListener('click', handleInteraction);
+                window.removeEventListener('keydown', handleInteraction);
+            };
+
+            window.addEventListener('click', handleInteraction);
+            window.addEventListener('keydown', handleInteraction);
+
+            return () => {
+                window.removeEventListener('click', handleInteraction);
+                window.removeEventListener('keydown', handleInteraction);
+            };
+        } catch (e) {
+            console.error("Audio initialization failed:", e);
+        }
+    }, []);
+
+    const playClick = () => {
+        try {
+            if (clickAudioRef.current) {
+                clickAudioRef.current.currentTime = 0; // Reset to start
+                const promise = clickAudioRef.current.play();
+                if (promise !== undefined) {
+                    promise.catch(error => console.error("Click play failed:", error));
+                }
+            }
+        } catch (e) {
+            console.error("PlayClick execution error:", e);
+        }
     };
 
-    const wrappedPlayHover = () => {
-        // console.log('Attempting to play hover sound'); // Commented out to avoid spam
-        playHover();
+    const playHover = () => {
+        // Only play hover sound if user has interacted (avoid console noise)
+        if (!hasInteracted) return;
+
+        try {
+            if (hoverAudioRef.current) {
+                hoverAudioRef.current.currentTime = 0;
+                hoverAudioRef.current.playbackRate = 2.0; // Ensure rate is set
+                const promise = hoverAudioRef.current.play();
+                if (promise !== undefined) {
+                    promise.catch(error => {
+                        // Ignore "AbortError" which happens if we play/pause quickly (fast hovering)
+                        if (error.name !== 'AbortError') {
+                            console.error("Hover play failed:", error);
+                        }
+                    });
+                }
+            }
+        } catch (e) {
+            console.error("PlayHover execution error:", e);
+        }
     };
 
-    return { playClick: wrappedPlayClick, playHover: wrappedPlayHover };
+    return { playClick, playHover };
 };
