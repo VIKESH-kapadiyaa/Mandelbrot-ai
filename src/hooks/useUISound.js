@@ -1,20 +1,34 @@
 import useSound from 'use-sound';
 
-// Short synthesized blip for hover (high pitch, short decay)
-const hoverSound = 'data:audio/wav;base64,UklGRl9vT1BXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU'; // Placeholder, useSound might need real file or better encoded string. 
-// Actually, empty base64 is often not enough. Let's use a standard silent fallback or a known short beep if possible. 
-// Since we can't easily generate valid wav binaries here without a lot of text, 
-// I will assume for this "Polishing" step that we might need to skip the actual binary content generation 
-// OR use a very simple effective strategy: minimal hosted files or just simple extensive variable.
-// usage of `use-sound` expects a URL.
-// Let's use a publicly available sound URL for demo purposes or a simple encoded beep.
-
-const CLICK_URL = 'https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3'; // Mechanical click
-const HOVER_URL = 'https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'; // Short blip
+const SOUND_PATH = '/sound/mixkit-sci-fi-click-900.wav';
 
 export const useUISound = () => {
-    const [playClick] = useSound(CLICK_URL, { volume: 0.5 });
-    const [playHover] = useSound(HOVER_URL, { volume: 0.2, playbackRate: 2 }); // Pitch up for hover
+    const [playClick, { error: clickError }] = useSound(SOUND_PATH, {
+        volume: 0.5,
+        onload: () => console.log('Click sound loaded'),
+        onloaderror: (id, err) => console.error('Click sound load error:', err)
+    });
 
-    return { playClick, playHover };
+    const [playHover, { error: hoverError }] = useSound(SOUND_PATH, {
+        volume: 0.1,
+        playbackRate: 4,
+        interrupt: true,
+        onload: () => console.log('Hover sound loaded'),
+        onloaderror: (id, err) => console.error('Hover sound load error:', err)
+    });
+
+    if (clickError) console.error('Click sound error:', clickError);
+    if (hoverError) console.error('Hover sound error:', hoverError);
+
+    const wrappedPlayClick = () => {
+        console.log('Attempting to play click sound');
+        playClick();
+    };
+
+    const wrappedPlayHover = () => {
+        // console.log('Attempting to play hover sound'); // Commented out to avoid spam
+        playHover();
+    };
+
+    return { playClick: wrappedPlayClick, playHover: wrappedPlayHover };
 };
