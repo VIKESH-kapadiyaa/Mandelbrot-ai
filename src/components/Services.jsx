@@ -67,7 +67,7 @@ export const Services = () => {
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    className="text-6xl md:text-9xl font-black tracking-tighter text-white mb-6"
+                    className="text-6xl md:text-7xl lg:text-9xl font-black tracking-tighter text-white mb-6"
                 >
                     CORE<br /><span className="text-slate-700">MODULES.</span>
                 </motion.h2>
@@ -84,7 +84,7 @@ export const Services = () => {
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1, duration: 0.8 }}
                         whileHover={{ scale: 0.98 }}
-                        className={`group relative rounded-[2rem] border p-12 overflow-hidden flex flex-col justify-between min-h-[400px] md:min-h-[300px] cursor-pointer flex-shrink-0 w-[85vw] md:w-auto snap-center ${service.colSpan} ${service.bg}`}
+                        className={`group relative rounded-[2rem] border p-8 md:p-8 lg:p-12 overflow-hidden flex flex-col justify-between min-h-[400px] md:min-h-[300px] cursor-pointer flex-shrink-0 w-[85vw] md:w-auto snap-center ${service.colSpan} ${service.bg}`}
                     >
                         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px] group-hover:bg-cyan-500/10 transition-colors duration-700 pointer-events-none -mr-20 -mt-20" />
 

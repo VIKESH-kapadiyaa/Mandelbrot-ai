@@ -149,7 +149,7 @@ export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
 
                 {/* HEADLINE */}
                 <div className="relative mb-16">
-                    <h1 className="text-5xl md:text-[150px] leading-tight md:leading-[0.8] font-black tracking-tighter select-none mix-blend-screen">
+                    <h1 className="text-5xl md:text-8xl lg:text-[150px] leading-tight md:leading-[0.8] font-black tracking-tighter select-none mix-blend-screen">
                         <span className="block text-slate-800/50 absolute top-2 left-2 blur-sm transform translate-x-2">AUTOMATE</span>
                         <ScrambleText text="AUTOMATE" className="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-slate-500" />
 

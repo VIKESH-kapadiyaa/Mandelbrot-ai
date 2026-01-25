@@ -74,7 +74,7 @@ export const Pricing = () => {
                 <p className="text-slate-500 text-lg uppercase tracking-widest font-mono">Select your protocol level</p>
             </div>
 
-            <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 relative z-10 perspective-1000 items-start">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10 perspective-1000 items-start">
 
                 {/* SOLO FOUNDER */}
                 <motion.div
@@ -190,7 +190,7 @@ export const Pricing = () => {
                 {/* ENTERPRISE */}
                 <motion.div
                     whileHover={{ y: -10 }}
-                    className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 flex flex-col backdrop-blur-sm h-full"
+                    className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 flex flex-col backdrop-blur-sm h-full md:col-span-2 lg:col-span-1"
                 >
                     <div className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-8 px-4 py-2 border border-white/10 rounded-full w-fit">
                         Enterprise
