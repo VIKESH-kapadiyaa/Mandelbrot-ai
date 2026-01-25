@@ -38,5 +38,11 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "vite": "^7.2.4"
+  },
+  "overrides": {
+    "react-helmet-async": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
   }
 }
