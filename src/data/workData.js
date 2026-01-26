@@ -11,7 +11,9 @@ export const workProjects = [
         sandboxType: 'terminal',
         sandboxUrl: null,
         color: '#22d3ee', // Cyan
-        personality: 'analytical'
+        personality: 'analytical',
+        category: 'Automation',
+        tags: ['Workflow', 'Integration', 'API']
     },
     {
         id: 'agent-2',
@@ -22,7 +24,9 @@ export const workProjects = [
         sandboxType: 'chat',
         sandboxUrl: 'https://atherai2026.app.n8n.cloud/webhook/a889d2ae-2159-402f-b326-5f61e90f602e/chat',
         color: '#a78bfa', // Purple
-        personality: 'friendly'
+        personality: 'friendly',
+        category: 'Chat',
+        tags: ['LLM', 'Context-Aware', 'Support']
     },
     {
         id: 'agent-3',
@@ -33,7 +37,9 @@ export const workProjects = [
         sandboxType: 'terminal',
         sandboxUrl: null,
         color: '#10b981', // Emerald
-        personality: 'precise'
+        personality: 'precise',
+        category: 'Data',
+        tags: ['ETL', 'Analytics', 'Self-Healing']
     },
     {
         id: 'agent-4',
@@ -44,7 +50,9 @@ export const workProjects = [
         sandboxType: 'iframe',
         sandboxUrl: 'https://example.com/scraper-demo',
         color: '#f59e0b', // Amber
-        personality: 'adaptive'
+        personality: 'adaptive',
+        category: 'Scraping',
+        tags: ['Web Scraping', 'Proxy Rotation', 'Dynamic']
     },
     {
         id: 'agent-5',
@@ -55,7 +63,9 @@ export const workProjects = [
         sandboxType: 'chat',
         sandboxUrl: null,
         color: '#ec4899', // Pink
-        personality: 'meticulous'
+        personality: 'meticulous',
+        category: 'Data',
+        tags: ['OCR', 'PDF', 'Insight Extraction']
     },
     {
         id: 'agent-6',
@@ -66,7 +76,9 @@ export const workProjects = [
         sandboxType: 'iframe',
         sandboxUrl: 'https://example.com/social-demo',
         color: '#3b82f6', // Blue
-        personality: 'creative'
+        personality: 'creative',
+        category: 'Social',
+        tags: ['Marketing', 'Optimization', 'Content']
     }
 ];
 

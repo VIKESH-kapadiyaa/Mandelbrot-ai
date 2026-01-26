@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import ParallaxSection from './ParallaxSection';
 
 const services = [
     {
@@ -58,7 +59,7 @@ export const Services = () => {
     return (
         <section
             ref={targetRef}
-            className="relative py-32 bg-black overflow-hidden"
+            className="relative py-32 bg-transparent overflow-hidden"
             id="services"
         >
             <div className="max-w-7xl mx-auto px-6 mb-24">
@@ -66,14 +67,14 @@ export const Services = () => {
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    className="text-6xl md:text-9xl font-black tracking-tighter text-white mb-6"
+                    className="text-6xl md:text-7xl lg:text-9xl font-black tracking-tighter text-white mb-6"
                 >
                     CORE<br /><span className="text-slate-700">MODULES.</span>
                 </motion.h2>
             </div>
 
-            {/* Grid */}
-            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-6">
+            {/* Grid/Carousel */}
+            <div className="max-w-7xl mx-auto px-6 flex md:grid md:grid-cols-12 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-8 md:pb-0 scrollbar-hide">
                 {services.map((service, i) => (
                     <motion.div
                         key={i}
@@ -83,7 +84,7 @@ export const Services = () => {
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1, duration: 0.8 }}
                         whileHover={{ scale: 0.98 }}
-                        className={`group relative rounded-[2rem] border p-12 overflow-hidden flex flex-col justify-between min-h-[300px] cursor-pointer ${service.colSpan} ${service.bg}`}
+                        className={`group relative rounded-[2rem] border p-8 md:p-8 lg:p-12 overflow-hidden flex flex-col justify-between min-h-[400px] md:min-h-[300px] cursor-pointer flex-shrink-0 w-[85vw] md:w-auto snap-center ${service.colSpan} ${service.bg}`}
                     >
                         <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px] group-hover:bg-cyan-500/10 transition-colors duration-700 pointer-events-none -mr-20 -mt-20" />
 
@@ -164,8 +165,13 @@ export const Services = () => {
                             </div>
 
                             {/* Decorative Background */}
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full pointer-events-none -mr-32 -mt-32" />
-                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 blur-[80px] rounded-full pointer-events-none -ml-32 -mb-32" />
+                            {/* Decorative Background */}
+                            <ParallaxSection offset={-20} className="absolute top-0 right-0 pointer-events-none -mr-32 -mt-32">
+                                <div className="w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full" />
+                            </ParallaxSection>
+                            <ParallaxSection offset={20} className="absolute bottom-0 left-0 pointer-events-none -ml-32 -mb-32">
+                                <div className="w-64 h-64 bg-purple-500/5 blur-[80px] rounded-full" />
+                            </ParallaxSection>
                         </motion.div>
                     </div>
                 )}

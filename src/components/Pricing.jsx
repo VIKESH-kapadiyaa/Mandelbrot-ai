@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-
+import { PricingCalculator } from './PricingCalculator';
+import ParallaxSection from './ParallaxSection';
 const CheckIcon = ({ className }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -15,7 +16,7 @@ export const Pricing = () => {
         }
 
         const options = {
-            key: "rzp_live_S2xIe19HV2XR7C", // Live API Key
+            key: import.meta.env.VITE_RAZORPAY_KEY, // Live API Key from env
             amount: amount, // Amount in paise
             currency: "INR",
             name: "Aether AI",
@@ -56,10 +57,24 @@ export const Pricing = () => {
                 >
                     ACCESS <span className="text-cyan-500">GRANTED</span>
                 </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-16"
+                >
+                    Transparent, usage-based scaling for any workload
+                </motion.p>
+
+                {/* Calculator */}
+                <div className="max-w-4xl mx-auto mb-20 text-left">
+                    <PricingCalculator />
+                </div>
                 <p className="text-slate-500 text-lg uppercase tracking-widest font-mono">Select your protocol level</p>
             </div>
 
-            <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 relative z-10 perspective-1000 items-start">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10 perspective-1000 items-start">
 
                 {/* SOLO FOUNDER */}
                 <motion.div
@@ -175,7 +190,7 @@ export const Pricing = () => {
                 {/* ENTERPRISE */}
                 <motion.div
                     whileHover={{ y: -10 }}
-                    className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 flex flex-col backdrop-blur-sm h-full"
+                    className="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 flex flex-col backdrop-blur-sm h-full md:col-span-2 lg:col-span-1"
                 >
                     <div className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-8 px-4 py-2 border border-white/10 rounded-full w-fit">
                         Enterprise
