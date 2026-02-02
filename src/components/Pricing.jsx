@@ -126,10 +126,10 @@ export const Pricing = () => {
                             {t('pricing.solo.title')}
                         </div>
                         <div className="text-4xl sm:text-5xl font-black mb-2 flex items-baseline gap-2 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-400 transition-all">
-                            $750 <span className="text-lg font-normal text-slate-500">/ mo</span>
+                            $550 <span className="text-lg font-normal text-slate-500">upto</span>
                         </div>
                         <div className="text-sm font-mono text-cyan-500/80 mb-6 flex items-center gap-2">
-                            billed monthly <span className="text-slate-600">cancel anytime</span>
+                            + $440 / monthly <span className="text-slate-600">upto</span>
                         </div>
 
                         <p className="text-slate-400 text-sm mb-8 leading-relaxed border-b border-white/10 pb-8 group-hover:border-white/20 transition-colors">
@@ -160,7 +160,7 @@ export const Pricing = () => {
                         </ul>
 
                         <button
-                            onClick={() => handlePayment(6000000, "Solo Founder Protocol")}
+                            onClick={() => handlePayment(5000000, "Solo Founder Protocol")}
                             className="w-full py-4 border border-white/10 hover:bg-white hover:text-black rounded-xl font-bold uppercase tracking-widest text-xs transition-all duration-300 mt-auto"
                         >
                             {t('pricing.solo.btn')}
@@ -200,10 +200,10 @@ export const Pricing = () => {
                                 {t('pricing.company.title')}
                             </div>
                             <div className="text-5xl sm:text-6xl font-black mb-2 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] flex items-baseline gap-2">
-                                $1,200 <span className="text-lg font-normal text-slate-400">/ mo</span>
+                                $1,100 <span className="text-lg font-normal text-slate-400">upto</span>
                             </div>
                             <div className="text-sm font-mono text-cyan-400 mb-6 flex items-center gap-2 bg-cyan-950/30 w-fit px-3 py-1 rounded border border-cyan-500/30">
-                                commercial license <span className="text-slate-400">included</span>
+                                + $660 / monthly <span className="text-slate-400">upto</span>
                             </div>
 
                             <p className="text-slate-300 text-sm mb-8 leading-relaxed border-b border-white/10 pb-8">
