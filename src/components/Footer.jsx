@@ -1,7 +1,7 @@
 import { Instagram, Linkedin } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 
-export const Footer = () => {
+export const Footer = ({ onOpenRefundPolicy, onOpenPrivacyPolicy, onOpenTermsOfService, onOpenAiUsePolicy }) => {
     const { t } = useLanguage();
 
     return (
@@ -136,8 +136,37 @@ export const Footer = () => {
 
                 {/* Footer Bar */}
                 <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-mono tracking-widest text-slate-500">
-                    <div className="flex items-center gap-2 group hover:text-slate-300 transition-colors cursor-default">
-                        <span>{t('footer.rights')}</span>
+
+                    <div className="flex items-center gap-6 group cursor-default">
+                        <span className="hover:text-slate-300 transition-colors">{t('footer.rights')}</span>
+                        <span className="w-px h-3 bg-white/10" />
+                        <button
+                            onClick={onOpenRefundPolicy}
+                            className="hover:text-cyan-400 transition-colors uppercase tracking-widest"
+                        >
+                            Refund Policy
+                        </button>
+                        <span className="w-px h-3 bg-white/10" />
+                        <button
+                            onClick={onOpenPrivacyPolicy}
+                            className="hover:text-cyan-400 transition-colors uppercase tracking-widest"
+                        >
+                            Privacy Policy
+                        </button>
+                        <span className="w-px h-3 bg-white/10" />
+                        <button
+                            onClick={onOpenTermsOfService}
+                            className="hover:text-cyan-400 transition-colors uppercase tracking-widest"
+                        >
+                            Terms of Service
+                        </button>
+                        <span className="w-px h-3 bg-white/10" />
+                        <button
+                            onClick={onOpenAiUsePolicy}
+                            className="hover:text-cyan-400 transition-colors uppercase tracking-widest"
+                        >
+                            AI Use Policy
+                        </button>
                     </div>
 
                     <div className="flex items-center gap-6">

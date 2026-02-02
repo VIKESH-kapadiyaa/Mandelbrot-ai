@@ -4,6 +4,10 @@ import { ScrollVideo } from "./components/ScrollProgress";
 import { ChatWidget } from "./components/ChatWidget";
 import { BookingModal } from "./components/BookingModal";
 import AntigravityBackground from "./components/AntigravityBackground";
+import RefundPolicy from "./components/RefundPolicy";
+import PrivacyModal from "./components/PrivacyModal";
+import TermsOfService from "./components/TermsOfService";
+import AiUsePolicy from "./components/AiUsePolicy";
 import { AnimatePresence, motion } from "framer-motion";
 import RevealOnScroll from "./components/RevealOnScroll";
 import SectionLoader from "./components/SectionLoader";
@@ -29,6 +33,10 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
+  const [isRefundPolicyOpen, setIsRefundPolicyOpen] = useState(false);
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
+  const [isTermsOfServiceOpen, setIsTermsOfServiceOpen] = useState(false);
+  const [isAiUsePolicyOpen, setIsAiUsePolicyOpen] = useState(false);
   const { t } = useLanguage();
   const { playClick, playHover } = useUISound();
 
@@ -177,13 +185,22 @@ const App = () => {
 
               <Suspense fallback={<div className="h-20 bg-black" />}>
                 <RevealOnScroll direction="up" delay={0.1}>
-                  <Footer />
+                  <Footer
+                    onOpenRefundPolicy={() => setIsRefundPolicyOpen(true)}
+                    onOpenPrivacyPolicy={() => setIsPrivacyPolicyOpen(true)}
+                    onOpenTermsOfService={() => setIsTermsOfServiceOpen(true)}
+                    onOpenAiUsePolicy={() => setIsAiUsePolicyOpen(true)}
+                  />
                 </RevealOnScroll>
               </Suspense>
               <ChatWidget />
               <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
               <AnimatePresence>
-                {isDashboardOpen && <StatusDashboard onClose={() => setIsDashboardOpen(false)} />}
+                {isDashboardOpen && <StatusDashboard key="dashboard" onClose={() => setIsDashboardOpen(false)} />}
+                <RefundPolicy key="refund" isOpen={isRefundPolicyOpen} onClose={() => setIsRefundPolicyOpen(false)} />
+                <PrivacyModal key="privacy" isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
+                <TermsOfService key="terms" isOpen={isTermsOfServiceOpen} onClose={() => setIsTermsOfServiceOpen(false)} />
+                <AiUsePolicy key="ai-policy" isOpen={isAiUsePolicyOpen} onClose={() => setIsAiUsePolicyOpen(false)} />
               </AnimatePresence>
               <MobileDock />
             </main>
