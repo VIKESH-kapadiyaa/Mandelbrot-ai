@@ -28,6 +28,7 @@ import { StatusDashboard } from "./components/StatusDashboard";
 
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import MobileDock from "./components/MobileDock";
+import { TopNavbar } from "./components/TopNavbar";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -94,37 +95,7 @@ const App = () => {
           ) : (
             <main id="main-content">
               {/* Navigation Overlay */}
-              <nav className="fixed top-0 inset-x-0 z-50 px-6 py-6 flex justify-between items-center pointer-events-none mix-blend-difference" aria-label="Main Navigation">
-                <div
-                  className="flex items-center gap-3 pointer-events-auto cursor-pointer"
-                  role="button"
-                  tabIndex={0}
-                  aria-label={t('nav.home')}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  onClick={() => {
-                    playClick();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  onMouseEnter={playHover}
-                >
-                  <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black" aria-hidden="true">A</div>
-                  <span className="font-bold tracking-widest hidden md:block">{t('nav.home').toUpperCase()}</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <LanguageSwitcher />
-                  <button
-                    onClick={() => {
-                      playClick();
-                      window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank');
-                    }}
-                    onMouseEnter={playHover}
-                    className="pointer-events-auto px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors"
-                    aria-label="Book a call with Aether AI agents"
-                  >
-                    {t('nav.book')}
-                  </button>
-                </div>
-              </nav>
+              <TopNavbar />
 
               <RevealOnScroll direction="up" delay={0.2}>
                 <section id="hero" className="snap-start">
