@@ -188,7 +188,7 @@ export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
                         <button
                             onClick={() => {
                                 playClick();
-                                window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank');
+                                setIsBookingOpen(true);
                             }}
                             onMouseEnter={playHover}
                             className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none hover:bg-cyan-400 transition-all overflow-hidden"
@@ -196,7 +196,7 @@ export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
                         >
                             <div className="absolute inset-0 bg-white/50 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out skew-x-12" />
                             <span className="relative z-10 flex items-center justify-center gap-2">
-                                {t('hero.cta_init')}
+                                INITIALIZE CONTRACT
                             </span>
                         </button>
 

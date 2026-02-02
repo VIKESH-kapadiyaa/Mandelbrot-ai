@@ -10,9 +10,22 @@ export const PokerDeck = ({ projects, onSelectProject }) => {
         const swipePower = Math.abs(info.offset.x);
 
         if (swipePower > swipeThreshold) {
-            // Card swiped away
             setExitDirection(info.offset.x > 0 ? 1 : -1);
-            setCards(prev => prev.filter(p => p.id !== project.id));
+
+            // Check if mobile
+            if (window.innerWidth < 768) {
+                // Recycle card to bottom of stack
+                setTimeout(() => {
+                    setCards(prev => {
+                        const newCards = prev.filter(p => p.id !== project.id);
+                        return [project, ...newCards];
+                    });
+                    setExitDirection(0);
+                }, 200); // Wait for swipe animation to start/complete partially
+            } else {
+                // Remove card on desktop
+                setCards(prev => prev.filter(p => p.id !== project.id));
+            }
         }
     };
 

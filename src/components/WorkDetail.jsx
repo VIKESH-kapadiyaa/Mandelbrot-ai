@@ -148,6 +148,17 @@ export const WorkDetail = ({ project, onClose, onSwitchProject }) => {
                                 </button>
                             </div>
 
+                            {/* Mobile Sandbox (Visible only on mobile) */}
+                            <div className="lg:hidden mb-12">
+                                <div className="mb-4">
+                                    <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Interactive Sandbox</h3>
+                                    <div className="h-px w-full bg-gradient-to-r from-white/10 to-transparent" />
+                                </div>
+                                <div className="h-[500px]">
+                                    <AgentSandbox project={project} />
+                                </div>
+                            </div>
+
                             {/* Stats Grid */}
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div className="p-6 bg-white/5 border border-white/10 rounded-xl">
@@ -187,8 +198,8 @@ export const WorkDetail = ({ project, onClose, onSwitchProject }) => {
                             </div>
                         </div>
 
-                        {/* Right Column - Sandbox (40%) */}
-                        <div className="lg:col-span-2">
+                        {/* Right Column - Sandbox (40%) - Desktop Only */}
+                        <div className="hidden lg:block lg:col-span-2">
                             <div className="sticky top-6">
                                 <div className="mb-4">
                                     <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 mb-2">Interactive Sandbox</h3>

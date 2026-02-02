@@ -4,6 +4,10 @@ import { ScrollVideo } from "./components/ScrollProgress";
 import { ChatWidget } from "./components/ChatWidget";
 import { BookingModal } from "./components/BookingModal";
 import AntigravityBackground from "./components/AntigravityBackground";
+import RefundPolicy from "./components/RefundPolicy";
+import PrivacyModal from "./components/PrivacyModal";
+import TermsOfService from "./components/TermsOfService";
+import AiUsePolicy from "./components/AiUsePolicy";
 import { AnimatePresence, motion } from "framer-motion";
 import RevealOnScroll from "./components/RevealOnScroll";
 import SectionLoader from "./components/SectionLoader";
@@ -24,11 +28,16 @@ import { StatusDashboard } from "./components/StatusDashboard";
 
 import { HelmetProvider, Helmet } from 'react-helmet-async';
 import MobileDock from "./components/MobileDock";
+import { TopNavbar } from "./components/TopNavbar";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isDashboardOpen, setIsDashboardOpen] = useState(false);
+  const [isRefundPolicyOpen, setIsRefundPolicyOpen] = useState(false);
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
+  const [isTermsOfServiceOpen, setIsTermsOfServiceOpen] = useState(false);
+  const [isAiUsePolicyOpen, setIsAiUsePolicyOpen] = useState(false);
   const { t } = useLanguage();
   const { playClick, playHover } = useUISound();
 
@@ -86,37 +95,7 @@ const App = () => {
           ) : (
             <main id="main-content">
               {/* Navigation Overlay */}
-              <nav className="fixed top-0 inset-x-0 z-50 px-6 py-6 flex justify-between items-center pointer-events-none mix-blend-difference" aria-label="Main Navigation">
-                <div
-                  className="flex items-center gap-3 pointer-events-auto cursor-pointer"
-                  role="button"
-                  tabIndex={0}
-                  aria-label={t('nav.home')}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-                  onClick={() => {
-                    playClick();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  onMouseEnter={playHover}
-                >
-                  <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black" aria-hidden="true">A</div>
-                  <span className="font-bold tracking-widest hidden md:block">{t('nav.home').toUpperCase()}</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <LanguageSwitcher />
-                  <button
-                    onClick={() => {
-                      playClick();
-                      window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank');
-                    }}
-                    onMouseEnter={playHover}
-                    className="pointer-events-auto px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors"
-                    aria-label="Book a call with Aether AI agents"
-                  >
-                    {t('nav.book')}
-                  </button>
-                </div>
-              </nav>
+              <TopNavbar />
 
               <RevealOnScroll direction="up" delay={0.2}>
                 <section id="hero" className="snap-start">
@@ -177,13 +156,22 @@ const App = () => {
 
               <Suspense fallback={<div className="h-20 bg-black" />}>
                 <RevealOnScroll direction="up" delay={0.1}>
-                  <Footer />
+                  <Footer
+                    onOpenRefundPolicy={() => setIsRefundPolicyOpen(true)}
+                    onOpenPrivacyPolicy={() => setIsPrivacyPolicyOpen(true)}
+                    onOpenTermsOfService={() => setIsTermsOfServiceOpen(true)}
+                    onOpenAiUsePolicy={() => setIsAiUsePolicyOpen(true)}
+                  />
                 </RevealOnScroll>
               </Suspense>
               <ChatWidget />
               <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
               <AnimatePresence>
-                {isDashboardOpen && <StatusDashboard onClose={() => setIsDashboardOpen(false)} />}
+                {isDashboardOpen && <StatusDashboard key="dashboard" onClose={() => setIsDashboardOpen(false)} />}
+                <RefundPolicy key="refund" isOpen={isRefundPolicyOpen} onClose={() => setIsRefundPolicyOpen(false)} />
+                <PrivacyModal key="privacy" isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
+                <TermsOfService key="terms" isOpen={isTermsOfServiceOpen} onClose={() => setIsTermsOfServiceOpen(false)} />
+                <AiUsePolicy key="ai-policy" isOpen={isAiUsePolicyOpen} onClose={() => setIsAiUsePolicyOpen(false)} />
               </AnimatePresence>
               <MobileDock />
             </main>
