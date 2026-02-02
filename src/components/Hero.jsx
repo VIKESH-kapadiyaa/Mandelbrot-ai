@@ -188,7 +188,7 @@ export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
                         <button
                             onClick={() => {
                                 playClick();
-                                window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank');
+                                setIsBookingOpen(true);
                             }}
                             onMouseEnter={playHover}
                             className="group relative w-64 h-16 bg-cyan-500 text-black font-black uppercase tracking-[0.2em] rounded-none hover:bg-cyan-400 transition-all overflow-hidden"
