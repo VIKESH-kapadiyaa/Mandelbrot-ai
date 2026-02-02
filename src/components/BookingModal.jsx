@@ -146,6 +146,21 @@ export const BookingModal = ({ isOpen, onClose }) => {
                                         />
                                     </div>
 
+                                    {/* Consent & Legal */}
+                                    <div className="pt-4 border-t border-white/10">
+                                        <div className="flex items-start gap-3 mb-4">
+                                            <input
+                                                type="checkbox"
+                                                required
+                                                id="consent"
+                                                className="mt-1 w-4 h-4 bg-white/5 border border-white/20 rounded accent-cyan-500 cursor-pointer"
+                                            />
+                                            <label htmlFor="consent" className="text-[11px] text-slate-400 leading-relaxed cursor-pointer select-none">
+                                                I agree to the <span className="text-white hover:text-cyan-400 transition-colors">Terms of Service</span>, <span className="text-white hover:text-cyan-400 transition-colors">Privacy Policy</span>, and <span className="text-white hover:text-cyan-400 transition-colors">AI Use Policy</span>. I acknowledge that Aether AI provides technology services without guaranteed business outcomes, and I am responsible for reviewing all AI outputs.
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <button
                                         disabled={status === 'loading'}
                                         className="w-full mt-4 bg-white text-black font-black uppercase tracking-widest text-xs py-4 rounded-xl hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
