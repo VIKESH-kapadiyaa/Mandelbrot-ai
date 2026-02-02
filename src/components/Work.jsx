@@ -135,7 +135,7 @@ export const Work = () => {
                                 </div>
 
                                 {/* Filters & Search */}
-                                <div className="mt-12 mb-8 flex flex-col md:flex-row items-center justify-center gap-6">
+                                <div className="hidden md:flex mt-12 mb-8 flex-col md:flex-row items-center justify-center gap-6">
                                     {/* Categories */}
                                     <div className="flex flex-wrap justify-center gap-2">
                                         {categories.map(category => (

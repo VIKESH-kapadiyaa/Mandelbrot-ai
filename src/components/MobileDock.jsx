@@ -14,35 +14,58 @@ const MobileDock = () => {
         { id: 'pricing', icon: CreditCard, label: 'Pricing' },
     ];
 
+    // Handle Dock Visibility on Scroll
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-
-            // Hide dock when scrolling down, show when scrolling up
             if (currentScrollY > lastScrollY && currentScrollY > 100) {
                 setIsVisible(false);
             } else {
                 setIsVisible(true);
             }
             setLastScrollY(currentScrollY);
-
-            // Determine active section
-            const sections = navItems.map(item => document.getElementById(item.id));
-            const scrollPosition = window.scrollY + window.innerHeight / 2;
-
-            for (const section of sections) {
-                if (section) {
-                    const { offsetTop, offsetHeight } = section;
-                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-                        setActiveSection(section.id);
-                    }
-                }
-            }
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, [lastScrollY]);
+
+    // Handle Active Section using IntersectionObserver
+    useEffect(() => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -20% 0px', // Active when element is in the middle 60% of screen
+            threshold: 0
+        };
+
+        const handleIntersect = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveSection(entry.target.id);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+        navItems.forEach((item) => {
+            const element = document.getElementById(item.id);
+            if (element) observer.observe(element);
+        });
+
+        // Retry observing after a delay to account for lazy loading
+        const retryTimeout = setTimeout(() => {
+            navItems.forEach((item) => {
+                const element = document.getElementById(item.id);
+                if (element) observer.observe(element);
+            });
+        }, 1000);
+
+        return () => {
+            observer.disconnect();
+            clearTimeout(retryTimeout);
+        };
+    }, []);
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
@@ -61,7 +84,7 @@ const MobileDock = () => {
                         animate={{ y: 0, opacity: 1 }}
                         exit={{ y: 100, opacity: 0 }}
                         transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-                        className="flex items-center gap-1 p-2 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl pointer-events-auto"
+                        className="flex items-center gap-1 p-2 bg-black/80 backdrop-blur-xl border border-white/10 rounded-full shadow-2xl pointer-events-auto"
                     >
                         {navItems.map((item) => {
                             const isActive = activeSection === item.id;
@@ -101,5 +124,6 @@ const MobileDock = () => {
         </AnimatePresence>
     );
 };
+
 
 export default MobileDock;

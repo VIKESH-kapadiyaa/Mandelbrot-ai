@@ -92,7 +92,7 @@ export const Footer = ({ onOpenRefundPolicy, onOpenPrivacyPolicy, onOpenTermsOfS
                     </div>
 
                     {/* Right Column: Navigation & Socials (Span 7) */}
-                    <div className="lg:col-span-7 flex flex-col md:flex-row justify-between lg:pl-20 pt-4 gap-12">
+                    <div className="lg:col-span-7 grid grid-cols-2 md:flex md:flex-row justify-between lg:pl-20 pt-4 gap-12">
 
                         {/* System Navigation */}
                         <div className="space-y-8">
