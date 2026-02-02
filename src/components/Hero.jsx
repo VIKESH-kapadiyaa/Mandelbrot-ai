@@ -196,7 +196,7 @@ export const Hero = ({ setIsBookingOpen, setIsDashboardOpen }) => {
                         >
                             <div className="absolute inset-0 bg-white/50 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out skew-x-12" />
                             <span className="relative z-10 flex items-center justify-center gap-2">
-                                {t('hero.cta_init')}
+                                INITIALIZE CONTRACT
                             </span>
                         </button>
 
