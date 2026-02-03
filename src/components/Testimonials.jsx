@@ -10,7 +10,7 @@ const testimonials = [
     {
         name: "David Chen",
         role: "Founder, ScaleUp",
-        text: "We replaced our entire support tier 1 with Aether's Conversational Agent. Customer satisfaction actually went UP.",
+        text: "We replaced our entire support tier 1 with Mandelbrot's Conversational Agent. Customer satisfaction actually went UP.",
         image: "https://randomuser.me/api/portraits/men/2.jpg"
     },
     {
@@ -22,7 +22,7 @@ const testimonials = [
     {
         name: "Marcus Thorne",
         role: "Director, DataCorp",
-        text: "Aether's extraction agents can parse unstructured PDFs better than any human. Absolute game changer for legal tech.",
+        text: "Mandelbrot's extraction agents can parse unstructured PDFs better than any human. Absolute game changer for legal tech.",
         image: "https://randomuser.me/api/portraits/men/4.jpg"
     }
 ];

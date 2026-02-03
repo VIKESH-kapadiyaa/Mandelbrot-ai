@@ -53,7 +53,7 @@ export const WorkDetail = ({ project, onClose, onSwitchProject }) => {
                 title={project.name}
                 description={project.description}
                 image={project.image}
-                url={`https://aether-ai.com/work/${project.id}`}
+                url={`https://mandelbrot.ai/work/${project.id}`}
                 type="article"
             />
             <div className="min-h-screen py-12 px-6">
@@ -120,7 +120,7 @@ export const WorkDetail = ({ project, onClose, onSwitchProject }) => {
                                 <div className="flex gap-4">
                                     <button
                                         onClick={() => {
-                                            const text = `Check out ${project.name} by Aether AI: https://aether-ai.com/work/${project.id}`;
+                                            const text = `Check out ${project.name} by Mandelbrot: https://mandelbrot.ai/work/${project.id}`;
                                             window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
                                         }}
                                         className="px-4 py-2 bg-white/5 hover:bg-[#1DA1F2]/20 hover:text-[#1DA1F2] border border-white/10 rounded-full text-xs font-bold uppercase transition-colors"
@@ -129,7 +129,7 @@ export const WorkDetail = ({ project, onClose, onSwitchProject }) => {
                                     </button>
                                     <button
                                         onClick={() => {
-                                            const url = `https://aether-ai.com/work/${project.id}`;
+                                            const url = `https://mandelbrot.ai/work/${project.id}`;
                                             window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank');
                                         }}
                                         className="px-4 py-2 bg-white/5 hover:bg-[#0077b5]/20 hover:text-[#0077b5] border border-white/10 rounded-full text-xs font-bold uppercase transition-colors"
@@ -140,7 +140,7 @@ export const WorkDetail = ({ project, onClose, onSwitchProject }) => {
                                 <button
                                     className="text-xs font-mono text-slate-500 hover:text-white transition-colors"
                                     onClick={() => {
-                                        navigator.clipboard.writeText(`https://aether-ai.com/work/${project.id}`);
+                                        navigator.clipboard.writeText(`https://mandelbrot.ai/work/${project.id}`);
                                         alert('Link copied to clipboard!');
                                     }}
                                 >

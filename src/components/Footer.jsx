@@ -31,7 +31,7 @@ export const Footer = ({ onOpenRefundPolicy, onOpenPrivacyPolicy, onOpenTermsOfS
                                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-50 transition-all duration-700" />
                                 <div className="relative w-full h-full bg-[#0A0A0A] border border-white/10 rounded-2xl flex items-center justify-center overflow-hidden group-hover:border-cyan-500/50 transition-colors duration-500">
                                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                    <span className="text-3xl font-black bg-gradient-to-br from-white to-slate-400 bg-clip-text text-transparent group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-500">A</span>
+                                    <span className="text-3xl font-black bg-gradient-to-br from-white to-slate-400 bg-clip-text text-transparent group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-500">M</span>
                                 </div>
                             </div>
 
@@ -57,7 +57,7 @@ export const Footer = ({ onOpenRefundPolicy, onOpenPrivacyPolicy, onOpenTermsOfS
 
                         {/* Professional Contact Cards */}
                         <div className="grid gap-4 w-full max-w-md">
-                            <a href="mailto:aether.business.ai@gmail.com" className="group relative overflow-hidden rounded-xl bg-white/[0.03] border border-white/5 p-4 hover:border-cyan-500/30 transition-all duration-500">
+                            <a href="mailto:mandelbrot.business.ai@gmail.com" className="group relative overflow-hidden rounded-xl bg-white/[0.03] border border-white/5 p-4 hover:border-cyan-500/30 transition-all duration-500">
                                 <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 <div className="relative flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-lg bg-[#0A0A0A] border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all duration-300">
@@ -65,7 +65,7 @@ export const Footer = ({ onOpenRefundPolicy, onOpenPrivacyPolicy, onOpenTermsOfS
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] uppercase tracking-widest text-slate-500 group-hover:text-cyan-400 transition-colors duration-300">{t('footer.inquiries')}</span>
-                                        <span className="text-sm font-mono text-slate-300 group-hover:text-white transition-colors duration-300">aether.business.ai@gmail.com</span>
+                                        <span className="text-sm font-mono text-slate-300 group-hover:text-white transition-colors duration-300">mandelbrot.business.ai@gmail.com</span>
                                     </div>
                                     <div className="ml-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300 text-cyan-500">
                                         →
@@ -73,7 +73,7 @@ export const Footer = ({ onOpenRefundPolicy, onOpenPrivacyPolicy, onOpenTermsOfS
                                 </div>
                             </a>
 
-                            <a href="mailto:atherai.caredesk@gmail.com" className="group relative overflow-hidden rounded-xl bg-white/[0.03] border border-white/5 p-4 hover:border-cyan-500/30 transition-all duration-500">
+                            <a href="mailto:mandelbrot.helpdesk.ai@gmail.com" className="group relative overflow-hidden rounded-xl bg-white/[0.03] border border-white/5 p-4 hover:border-cyan-500/30 transition-all duration-500">
                                 <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 <div className="relative flex items-center gap-4">
                                     <div className="w-10 h-10 rounded-lg bg-[#0A0A0A] border border-white/10 flex items-center justify-center text-slate-400 group-hover:text-cyan-400 group-hover:border-cyan-500/30 transition-all duration-300">
@@ -81,7 +81,7 @@ export const Footer = ({ onOpenRefundPolicy, onOpenPrivacyPolicy, onOpenTermsOfS
                                     </div>
                                     <div className="flex flex-col">
                                         <span className="text-[10px] uppercase tracking-widest text-slate-500 group-hover:text-cyan-400 transition-colors duration-300">{t('footer.support')}</span>
-                                        <span className="text-sm font-mono text-slate-300 group-hover:text-white transition-colors duration-300">atherai.caredesk@gmail.com</span>
+                                        <span className="text-sm font-mono text-slate-300 group-hover:text-white transition-colors duration-300">mandelbrot.helpdesk.ai@gmail.com</span>
                                     </div>
                                     <div className="ml-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300 text-cyan-500">
                                         →

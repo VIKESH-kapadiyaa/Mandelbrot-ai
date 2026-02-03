@@ -31,7 +31,7 @@ const PrivacyModal = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                             <h2 className="text-xl font-bold text-white tracking-wide">Privacy Policy</h2>
-                            <p className="text-xs text-slate-400 font-mono uppercase tracking-widest mt-1">Aether AI Data Protection</p>
+                            <p className="text-xs text-slate-400 font-mono uppercase tracking-widest mt-1">Mandelbrot Data Protection</p>
                         </div>
                     </div>
                     <button
@@ -49,7 +49,7 @@ const PrivacyModal = ({ isOpen, onClose }) => {
                     <div className="p-4 bg-cyan-500/5 border border-cyan-500/10 rounded-xl mb-8">
                         <p className="text-sm">
                             <strong className="text-cyan-400 block mb-2 uppercase tracking-wider text-xs">Last Updated: {new Date().toLocaleDateString()}</strong>
-                            This Privacy Policy describes how <strong>Aether AI</strong> ("Company", "we", "us") collects, uses, and protects your information when you use our website, dashboard, and AI automation services. By using our services, you agree to the collection and use of information in accordance with this policy.
+                            This Privacy Policy describes how <strong>Mandelbrot</strong> ("Company", "we", "us") collects, uses, and protects your information when you use our website, dashboard, and AI automation services. By using our services, you agree to the collection and use of information in accordance with this policy.
                         </p>
                     </div>
 
@@ -130,7 +130,7 @@ const PrivacyModal = ({ isOpen, onClose }) => {
                             ))}
                         </ul>
                         <p className="text-sm mt-4 text-slate-400 italic">
-                            Aether AI does not own the data processed within your specific workflows. We act as a facilitator and architect of these automations.
+                            Mandelbrot does not own the data processed within your specific workflows. We act as a facilitator and architect of these automations.
                         </p>
                     </section>
 
@@ -193,7 +193,7 @@ const PrivacyModal = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">10.</span> Contact Us
                         </h3>
                         <p className="text-sm text-slate-400">
-                            If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:aether.business.ai@gmail.com" className="text-cyan-400 hover:underline">aether.business.ai@gmail.com</a>
+                            If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:mandelbrot.business.ai@gmail.com" className="text-cyan-400 hover:underline">mandelbrot.business.ai@gmail.com</a>
                         </p>
                     </section>
                 </div>

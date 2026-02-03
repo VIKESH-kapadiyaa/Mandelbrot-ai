@@ -1,8 +1,8 @@
-# Aether AI — Autonomous Neural Systems
+# Mandelbrot — Automating the Future
 
 ## Overview
 
-Aether AI is a **GitHub-ready, production-grade React template** built for AI automation agencies, consultants, and system builders selling high-ticket AI services.
+Mandelbrot is a **GitHub-ready, production-grade React template** built for AI automation agencies, consultants, and system builders selling high-ticket AI services.
 
 It prioritizes **clarity, performance, and credibility** while maintaining a futuristic, minimal aesthetic suitable for enterprise clients.
 
@@ -135,4 +135,4 @@ MIT License
 
 ***
 
-© 2026 Aether AI
+© 2026 Mandelbrot

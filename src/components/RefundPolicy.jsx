@@ -31,7 +31,7 @@ const RefundPolicy = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                             <h2 className="text-xl font-bold text-white tracking-wide">Refund, Cancellation & Termination Policy</h2>
-                            <p className="text-xs text-slate-400 font-mono uppercase tracking-widest mt-1">Aether AI Legal Framework</p>
+                            <p className="text-xs text-slate-400 font-mono uppercase tracking-widest mt-1">Mandelbrot Legal Framework</p>
                         </div>
                     </div>
                     <button
@@ -49,7 +49,7 @@ const RefundPolicy = ({ isOpen, onClose }) => {
                     <div className="p-4 bg-cyan-500/5 border border-cyan-500/10 rounded-xl mb-8">
                         <p className="text-sm">
                             <strong className="text-cyan-400 block mb-2 uppercase tracking-wider text-xs">Effective Date: {new Date().toLocaleDateString()}</strong>
-                            This Refund, Cancellation & Termination Policy ("Policy") governs your relationship with <strong>Aether AI</strong> ("Company", "we", "us"). By engaging our services, subscribing to plans, or paying setup fees, you ("Client", "you") agree to be bound by these terms.
+                            This Refund, Cancellation & Termination Policy ("Policy") governs your relationship with <strong>Mandelbrot</strong> ("Company", "we", "us"). By engaging our services, subscribing to plans, or paying setup fees, you ("Client", "you") agree to be bound by these terms.
                         </p>
                     </div>
 
@@ -59,7 +59,7 @@ const RefundPolicy = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">01.</span> Definitions
                         </h3>
                         <ul className="list-disc pl-5 space-y-2 text-sm text-slate-400">
-                            <li><strong>"Service"</strong>: AI automation workflows, AI agent development, consulting, and associated software solutions provided by Aether AI.</li>
+                            <li><strong>"Service"</strong>: AI automation workflows, AI agent development, consulting, and associated software solutions provided by Mandelbrot.</li>
                             <li><strong>"Setup Fee"</strong>: A one-time non-refundable charge for initial architecture design, resource allocation, and workflow onboarding.</li>
                             <li><strong>"Subscription"</strong>: Recurring monthly fees for ongoing access to services, maintenance, and compute credits.</li>
                             <li><strong>"Cycle"</strong>: The 30-day billing period starting from the date of payment.</li>
@@ -147,7 +147,7 @@ const RefundPolicy = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">06.</span> No Guarantees & AI Disclaimer
                         </h3>
                         <p className="text-sm mb-4">
-                            You acknowledge that Aether AI provides tools and automation services, not guaranteed business outcomes.
+                            You acknowledge that Mandelbrot provides tools and automation services, not guaranteed business outcomes.
                         </p>
                         <ul className="list-disc pl-5 space-y-2 text-sm text-slate-400">
                             <li><strong>Performance:</strong> We do not guarantee specific revenue, ROI, or efficiency gains.</li>
@@ -159,7 +159,7 @@ const RefundPolicy = ({ isOpen, onClose }) => {
                     {/* Section 7: Termination */}
                     <section>
                         <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                            <span className="text-cyan-500">07.</span> Termination by Aether AI
+                            <span className="text-cyan-500">07.</span> Termination by Mandelbrot
                         </h3>
                         <p className="text-sm mb-3">
                             We reserve the right to terminate services immediately <strong>without refund</strong> if the Client:
@@ -178,7 +178,7 @@ const RefundPolicy = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">08.</span> Limitation of Liability
                         </h3>
                         <p className="text-sm text-slate-300 bg-white/5 p-4 rounded-lg border border-white/10">
-                            To the maximum extent permitted by law, Aether AI's total liability for any claim arising out of or relating to these services shall be limited to the <strong>lower of</strong>: (a) the total fees paid by the Client in the three (3) months preceding the claim, or (b) the total amount paid by the Client to Aether AI.
+                            To the maximum extent permitted by law, Mandelbrot's total liability for any claim arising out of or relating to these services shall be limited to the <strong>lower of</strong>: (a) the total fees paid by the Client in the three (3) months preceding the claim, or (b) the total amount paid by the Client to Mandelbrot.
                         </p>
                     </section>
 

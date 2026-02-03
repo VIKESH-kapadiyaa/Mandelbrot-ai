@@ -3,35 +3,35 @@
     <!-- Static Pages -->
     
     <url>
-        <loc>https://aether-ai.com/</loc>
+        <loc>https://mandelbrot.ai/</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/#work</loc>
+        <loc>https://mandelbrot.ai/#work</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/#process</loc>
+        <loc>https://mandelbrot.ai/#process</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/#pricing</loc>
+        <loc>https://mandelbrot.ai/#pricing</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/#contact</loc>
+        <loc>https://mandelbrot.ai/#contact</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
@@ -41,42 +41,42 @@
     <!-- Dynamic Work Pages -->
     
     <url>
-        <loc>https://aether-ai.com/work/agent-1</loc>
+        <loc>https://mandelbrot.ai/work/agent-1</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/work/agent-2</loc>
+        <loc>https://mandelbrot.ai/work/agent-2</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/work/agent-3</loc>
+        <loc>https://mandelbrot.ai/work/agent-3</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/work/agent-4</loc>
+        <loc>https://mandelbrot.ai/work/agent-4</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/work/agent-5</loc>
+        <loc>https://mandelbrot.ai/work/agent-5</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     
     <url>
-        <loc>https://aether-ai.com/work/agent-6</loc>
+        <loc>https://mandelbrot.ai/work/agent-6</loc>
         <lastmod>2026-02-02T09:13:01.257Z</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>

@@ -63,7 +63,7 @@ export const TopNavbar = () => {
                             }}
                             onMouseEnter={playHover}
                             className="px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors"
-                            aria-label="Book a call with Aether AI agents"
+                            aria-label="Book a call with Mandelbrot agents"
                         >
                             {t('nav.book')}
                         </button>

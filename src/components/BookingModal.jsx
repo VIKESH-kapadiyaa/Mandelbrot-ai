@@ -212,7 +212,7 @@ export const BookingModal = ({ isOpen, onClose }) => {
                                             <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.5)_50%)] bg-[size:100%_4px] opacity-20" />
 
                                             <div className="font-mono text-[10px] text-cyan-500/80 leading-relaxed space-y-3">
-                                                <p className="opacity-70">{`// AETHER AI SERVICE AGREEMENT`}</p>
+                                                <p className="opacity-70">{`// MANDELBROT SERVICE AGREEMENT`}</p>
                                                 <p className="opacity-70">{`// CLIENT: ${formData.name || 'PENDING...'}`}</p>
                                                 <p className="opacity-70">{`// TYPE: ${formData.clientType ? formData.clientType.toUpperCase() : 'UNDEFINED'}`}</p>
 

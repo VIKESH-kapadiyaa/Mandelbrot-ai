@@ -49,7 +49,7 @@ const AiUsePolicy = ({ isOpen, onClose }) => {
                     <div className="p-4 bg-cyan-500/5 border border-cyan-500/10 rounded-xl mb-8">
                         <p className="text-sm">
                             <strong className="text-cyan-400 block mb-2 uppercase tracking-wider text-xs">Last Updated: {new Date().toLocaleDateString()}</strong>
-                            This AI Use Policy outlines the responsible, lawful, and ethical use of Artificial Intelligence services provided by <strong>Aether AI</strong> ("Company", "we"). By using our AI-enabled features, you agree to comply with this policy.
+                            This AI Use Policy outlines the responsible, lawful, and ethical use of Artificial Intelligence services provided by <strong>Mandelbrot</strong> ("Company", "we"). By using our AI-enabled features, you agree to comply with this policy.
                         </p>
                     </div>
 
@@ -69,7 +69,7 @@ const AiUsePolicy = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">02.</span> Scope
                         </h3>
                         <p className="text-sm text-slate-400">
-                            This policy applies to all users, clients, and entities accessing Aether AI's services, including but not limited to AI agents, workflow automations, and generated content.
+                            This policy applies to all users, clients, and entities accessing Mandelbrot's services, including but not limited to AI agents, workflow automations, and generated content.
                         </p>
                     </section>
 
@@ -97,7 +97,7 @@ const AiUsePolicy = ({ isOpen, onClose }) => {
                         <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
                             <span className="text-cyan-500">04.</span> Prohibited Uses
                         </h3>
-                        <p className="text-sm mb-3">You typically agree NOT to use Aether AI services for:</p>
+                        <p className="text-sm mb-3">You typically agree NOT to use Mandelbrot services for:</p>
                         <ul className="space-y-2 text-sm text-slate-400">
                             <li className="flex gap-2">
                                 <Siren size={14} className="text-red-400 mt-1 shrink-0" />
@@ -159,7 +159,7 @@ const AiUsePolicy = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">07.</span> Third-Party Providers
                         </h3>
                         <p className="text-sm text-slate-400">
-                            Aether AI integrates with third-party models and APIs (e.g., OpenAI, n8n). We do not control the internal decision-making processes of these models and are not liable for their independent failures or changes in policy.
+                            Mandelbrot integrates with third-party models and APIs (e.g., OpenAI, n8n). We do not control the internal decision-making processes of these models and are not liable for their independent failures or changes in policy.
                         </p>
                     </section>
 
@@ -169,7 +169,7 @@ const AiUsePolicy = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">08.</span> Suspension & Enforcement
                         </h3>
                         <p className="text-sm text-slate-400">
-                            Aether AI reserves the right to immediately suspend or terminate access to services without refund if we detect usage in violation of this Policy.
+                            Mandelbrot reserves the right to immediately suspend or terminate access to services without refund if we detect usage in violation of this Policy.
                         </p>
                     </section>
 
@@ -199,7 +199,7 @@ const AiUsePolicy = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">11.</span> Contact Us
                         </h3>
                         <p className="text-sm text-slate-400">
-                            For questions regarding AI safety or governance, contact: <a href="mailto:aether.business.ai@gmail.com" className="text-cyan-400 hover:underline">aether.business.ai@gmail.com</a>
+                            For questions regarding AI safety or governance, contact: <a href="mailto:mandelbrot.business.ai@gmail.com" className="text-cyan-400 hover:underline">mandelbrot.business.ai@gmail.com</a>
                         </p>
                     </section>
                 </div>

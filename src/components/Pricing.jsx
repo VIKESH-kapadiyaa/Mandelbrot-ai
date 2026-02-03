@@ -22,9 +22,9 @@ export const Pricing = () => {
             key: import.meta.env.VITE_RAZORPAY_KEY, // Live API Key from env
             amount: amount, // Amount in paise
             currency: "INR",
-            name: "Aether AI",
+            name: "Mandelbrot",
             description: `Payment for ${planName}`,
-            image: "https://via.placeholder.com/150?text=Aether+AI", // Replace with actual logo URL if available
+            image: "https://via.placeholder.com/150?text=Mandelbrot", // Replace with actual logo URL if available
             handler: function (response) {
                 alert(`Payment Successful! Payment ID: ${response.razorpay_payment_id}`);
                 // Verify payment on backend here if needed
@@ -35,7 +35,7 @@ export const Pricing = () => {
                 contact: ""
             },
             notes: {
-                address: "Aether AI HQ"
+                address: "Mandelbrot HQ"
             },
             theme: {
                 color: "#22d3ee" // Cyan brand color
@@ -155,7 +155,7 @@ export const Pricing = () => {
                             </li>
                             <li className="flex items-start gap-3 text-sm text-slate-300 group-hover:text-white transition-colors">
                                 <CheckIcon className="w-5 h-5 text-cyan-900 group-hover:text-cyan-400 shrink-0 transition-colors duration-300" />
-                                <span><strong className="text-white">{t('pricing.features.license')}:</strong> Aether AI Branded</span>
+                                <span><strong className="text-white">{t('pricing.features.license')}:</strong> Mandelbrot Branded</span>
                             </li>
                         </ul>
 

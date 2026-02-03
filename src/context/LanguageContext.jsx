@@ -4,7 +4,7 @@ const LanguageContext = createContext();
 
 export const translations = {
     en: {
-        nav: { home: 'Aether AI', book: 'Book Call' },
+        nav: { home: 'Mandelbrot', book: 'Book Call' },
         hero: {
             title_prefix: 'THE',
             title_future: 'FUTURE',
@@ -113,8 +113,8 @@ export const translations = {
             ]
         },
         footer: {
-            title: 'Aether AI',
-            subtitle: 'Automation Systems',
+            title: 'Mandelbrot',
+            subtitle: 'Automating the Future',
             desc_part1: 'We build the autonomous nervous systems for the next generation of enterprise.',
             desc_part2: 'Replace manual chaos with intelligent order.',
             inquiries: 'Business Inquiries',
@@ -123,7 +123,7 @@ export const translations = {
             network: 'Network',
             status: 'SYSTEM STATUS',
             operational: 'OPERATIONAL',
-            rights: '© 2026 AETHER AI AUTOMATION AGENCY',
+            rights: '© 2026 MANDELBROT AUTOMATION AGENCY',
             nav: {
                 services: 'Services',
                 architecture: 'Architecture',
@@ -145,7 +145,7 @@ export const translations = {
         }
     },
     fr: {
-        nav: { home: 'Aether IA', book: 'Réserver' },
+        nav: { home: 'Mandelbrot', book: 'Réserver' },
         hero: {
             title_prefix: 'LE',
             title_future: 'FUTUR',
@@ -267,8 +267,8 @@ export const translations = {
             ]
         },
         footer: {
-            title: 'Aether IA',
-            subtitle: 'Systèmes d\'Automatisation',
+            title: 'Mandelbrot',
+            subtitle: 'Automatiser l\'avenir',
             desc_part1: 'Nous construisons les systèmes nerveux autonomes pour la prochaine génération d\'entreprises.',
             desc_part2: 'Remplacez le chaos manuel par un ordre intelligent.',
             inquiries: 'Demandes Commerciales',
@@ -277,7 +277,7 @@ export const translations = {
             network: 'Réseau',
             status: 'ÉTAT SYSTÈME',
             operational: 'OPÉRATIONNEL',
-            rights: '© 2026 Agence d\'Automatisation AETHER IA',
+            rights: '© 2026 Agence d\'Automatisation MANDELBROT',
             nav: {
                 services: 'Services',
                 architecture: 'Architecture',
@@ -286,7 +286,7 @@ export const translations = {
         }
     },
     es: {
-        nav: { home: 'Aether IA', book: 'Agendar' },
+        nav: { home: 'Mandelbrot', book: 'Agendar' },
         hero: {
             title_prefix: 'EL',
             title_future: 'FUTURO',
@@ -408,8 +408,8 @@ export const translations = {
             ]
         },
         footer: {
-            title: 'Aether IA',
-            subtitle: 'Sistemas de Automatización',
+            title: 'Mandelbrot',
+            subtitle: 'Automatizando el Futuro',
             desc_part1: 'Construimos los sistemas nerviosos autónomos para la próxima generación de empresas.',
             desc_part2: 'Reemplaza el caos manual con orden inteligente.',
             inquiries: 'Consultas Comerciales',
@@ -418,7 +418,7 @@ export const translations = {
             network: 'Red',
             status: 'ESTADO DEL SISTEMA',
             operational: 'OPERATIVO',
-            rights: '© 2026 AGENCIA DE AUTOMATIZACIÓN AETHER IA',
+            rights: '© 2026 AGENCIA DE AUTOMATIZACIÓN MANDELBROT',
             nav: {
                 services: 'Servicios',
                 architecture: 'Arquitectura',
@@ -427,7 +427,7 @@ export const translations = {
         }
     },
     hi: {
-        nav: { home: 'एथर एआई', book: 'परामर्श बुक करें' },
+        nav: { home: 'Mandelbrot', book: 'परामर्श बुक करें' },
         hero: {
             title_prefix: 'नया',
             title_future: 'भविष्य',
@@ -549,8 +549,8 @@ export const translations = {
             ]
         },
         footer: {
-            title: 'एथर एआई',
-            subtitle: 'स्वचालन प्रणालियाँ',
+            title: 'Mandelbrot',
+            subtitle: 'भविष्य को स्वचालित करना',
             desc_part1: 'हम उद्यम की अगली पीढ़ी के लिए स्वायत्त तंत्रिका तंत्र का निर्माण करते हैं।',
             desc_part2: 'मैन्युअल अराजकता को बुद्धिमान व्यवस्था से बदलें।',
             inquiries: 'व्यापार पूछताछ',
@@ -559,7 +559,7 @@ export const translations = {
             network: 'नेटवर्क',
             status: 'सिस्टम स्थिति',
             operational: 'संचालित',
-            rights: '© 2026 एथर एआई स्वचालन एजेंसी',
+            rights: '© 2026 MANDELBROT स्वचालन एजेंसी',
             nav: {
                 services: 'सेवाएं',
                 architecture: 'आर्किटेक्चर',
@@ -568,7 +568,7 @@ export const translations = {
         }
     },
     'hi-en': {
-        nav: { home: 'Aether AI', book: 'Call Book Karein' },
+        nav: { home: 'Mandelbrot', book: 'Call Book Karein' },
         hero: {
             title_prefix: 'FUTURE',
             title_future: 'KA',
@@ -690,8 +690,8 @@ export const translations = {
             ]
         },
         footer: {
-            title: 'Aether AI',
-            subtitle: 'Automation Systems',
+            title: 'Mandelbrot',
+            subtitle: 'Automating the Future',
             desc_part1: 'Hum next-gen enterprises ke liye autonomous nervous systems banate hain.',
             desc_part2: 'Manual chaos ko intelligent order se replace karein.',
             inquiries: 'Business Puch-taach',
@@ -700,7 +700,7 @@ export const translations = {
             network: 'Network',
             status: 'SYSTEM STATUS',
             operational: 'CHAALU HAI',
-            rights: '© 2026 AETHER AI AUTOMATION AGENCY',
+            rights: '© 2026 MANDELBROT AUTOMATION AGENCY',
             nav: {
                 services: 'Services',
                 architecture: 'Architecture',

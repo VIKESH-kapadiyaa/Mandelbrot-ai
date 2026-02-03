@@ -31,7 +31,7 @@ const TermsOfService = ({ isOpen, onClose }) => {
                         </div>
                         <div>
                             <h2 className="text-xl font-bold text-white tracking-wide">Terms of Service</h2>
-                            <p className="text-xs text-slate-400 font-mono uppercase tracking-widest mt-1">Aether AI Usage Agreement</p>
+                            <p className="text-xs text-slate-400 font-mono uppercase tracking-widest mt-1">Mandelbrot Usage Agreement</p>
                         </div>
                     </div>
                     <button
@@ -49,7 +49,7 @@ const TermsOfService = ({ isOpen, onClose }) => {
                     <div className="p-4 bg-cyan-500/5 border border-cyan-500/10 rounded-xl mb-8">
                         <p className="text-sm">
                             <strong className="text-cyan-400 block mb-2 uppercase tracking-wider text-xs">Last Updated: {new Date().toLocaleDateString()}</strong>
-                            These Terms of Service ("Terms") enable a legal agreement between you ("Client", "User") and <strong>Aether AI</strong> ("Company", "we", "us"). By accessing our website, dashboard, or using our AI automation services, you agree to be bound by these Terms.
+                            These Terms of Service ("Terms") enable a legal agreement between you ("Client", "User") and <strong>Mandelbrot</strong> ("Company", "we", "us"). By accessing our website, dashboard, or using our AI automation services, you agree to be bound by these Terms.
                         </p>
                     </div>
 
@@ -68,7 +68,7 @@ const TermsOfService = ({ isOpen, onClose }) => {
                         <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
                             <span className="text-cyan-500">02.</span> Scope of Services
                         </h3>
-                        <p className="text-sm mb-3">Aether AI provides technology services, including but not limited to:</p>
+                        <p className="text-sm mb-3">Mandelbrot provides technology services, including but not limited to:</p>
                         <ul className="list-disc pl-5 space-y-2 text-sm text-slate-400">
                             <li>Development of AI agents and chatbots.</li>
                             <li>Workflow automation architecture (using n8n Cloud).</li>
@@ -142,7 +142,7 @@ const TermsOfService = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">07.</span> AI & Automation Disclaimer
                         </h3>
                         <p className="text-sm text-slate-400">
-                            Artificial Intelligence is probabilistic, not deterministic. You acknowledge that AI outputs may be inaccurate, incomplete, misleading, or offensive ("Hallucinations"). Aether AI is not responsible for any decisions, actions, or damages resulting from your reliance on AI-generated content.
+                            Artificial Intelligence is probabilistic, not deterministic. You acknowledge that AI outputs may be inaccurate, incomplete, misleading, or offensive ("Hallucinations"). Mandelbrot is not responsible for any decisions, actions, or damages resulting from your reliance on AI-generated content.
                         </p>
                     </section>
 
@@ -162,7 +162,7 @@ const TermsOfService = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">09.</span> Intellectual Property
                         </h3>
                         <ul className="space-y-2 text-sm text-slate-400">
-                            <li><strong>Aether AI Ownership:</strong> We retain all rights to our proprietary tools, pre-built templates, codebases, and internal workflow architectures.</li>
+                            <li><strong>Mandelbrot Ownership:</strong> We retain all rights to our proprietary tools, pre-built templates, codebases, and internal workflow architectures.</li>
                             <li><strong>Client Ownership:</strong> You retain ownership of your customer data and specific content inputs.</li>
                             <li><strong>No Transfer:</strong> These Terms do not transfer any Intellectual Property rights unless explicitly agreed to in a separate written agreement.</li>
                         </ul>
@@ -184,7 +184,7 @@ const TermsOfService = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">11.</span> Limitation of Liability
                         </h3>
                         <p className="text-sm text-slate-300 bg-white/5 p-4 rounded-lg border border-white/10">
-                            To the maximum extent permitted by law, Aether AI's total liability shall be limited to the <strong>lower of</strong>: (a) the fees paid by you in the three (3) months preceding the claim, or (b) the total amount paid by you to Aether AI. We shall not be liable for any indirect, incidental, or consequential damages.
+                            To the maximum extent permitted by law, Mandelbrot's total liability shall be limited to the <strong>lower of</strong>: (a) the fees paid by you in the three (3) months preceding the claim, or (b) the total amount paid by you to Mandelbrot. We shall not be liable for any indirect, incidental, or consequential damages.
                         </p>
                     </section>
 
@@ -214,7 +214,7 @@ const TermsOfService = ({ isOpen, onClose }) => {
                             <span className="text-cyan-500">14.</span> Contact Us
                         </h3>
                         <p className="text-sm text-slate-400">
-                            For any questions regarding these Terms, please contact us at: <a href="mailto:aether.business.ai@gmail.com" className="text-cyan-400 hover:underline">aether.business.ai@gmail.com</a>
+                            For any questions regarding these Terms, please contact us at: <a href="mailto:mandelbrot.business.ai@gmail.com" className="text-cyan-400 hover:underline">mandelbrot.business.ai@gmail.com</a>
                         </p>
                     </section>
                 </div>

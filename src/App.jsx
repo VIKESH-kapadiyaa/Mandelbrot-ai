@@ -89,7 +89,7 @@ const App = () => {
                 animate={{ opacity: 1 }}
                 className="mt-4 text-xs font-mono uppercase tracking-[0.4em] text-cyan-500"
               >
-                Initializing Aether AI...
+                Initializing Mandelbrot...
               </motion.div>
             </motion.div>
           ) : (

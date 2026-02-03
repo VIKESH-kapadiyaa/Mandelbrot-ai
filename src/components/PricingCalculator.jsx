@@ -104,7 +104,7 @@ export const PricingCalculator = () => {
                             <span className="text-white font-mono">${metrics.monthlyHumanCost.toLocaleString()}/mo</span>
                         </div>
                         <div className="flex justify-between text-sm text-slate-400">
-                            <span>Aether AI Operation Cost</span>
+                            <span>Mandelbrot Operation Cost</span>
                             <span className="text-cyan-400 font-mono">${metrics.monthlyAiCost.toLocaleString()}/mo</span>
                         </div>
                     </div>
