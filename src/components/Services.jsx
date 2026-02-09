@@ -3,12 +3,14 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { X } from "lucide-react";
 import ParallaxSection from './ParallaxSection';
 import { useLanguage } from "../context/LanguageContext";
+import { useBookDemo } from "../context/BookDemoContext";
 
 export const Services = () => {
     const targetRef = useRef(null);
     const { scrollYProgress } = useScroll({ target: targetRef });
     const [selectedService, setSelectedService] = useState(null);
     const { t } = useLanguage();
+    const { openBookDemo } = useBookDemo();
 
     const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
 
@@ -145,7 +147,7 @@ export const Services = () => {
                                     <button
                                         onClick={() => {
                                             setSelectedService(null);
-                                            window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank');
+                                            openBookDemo();
                                         }}
                                         className="px-6 py-3 bg-white text-black font-bold uppercase tracking-widest text-xs rounded-full hover:bg-cyan-400 transition-colors"
                                     >

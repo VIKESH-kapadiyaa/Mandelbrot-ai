@@ -20,7 +20,9 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-helmet-async": "^2.0.5",
+    "react-markdown": "^10.1.0",
     "react-razorpay": "^3.0.1",
+    "remark-gfm": "^4.0.1",
     "three": "^0.182.0",
     "use-sound": "^5.0.0"
   },

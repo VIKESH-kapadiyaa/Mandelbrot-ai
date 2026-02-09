@@ -4,7 +4,7 @@ import { useUISound } from "../hooks/useUISound";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { motion, AnimatePresence } from "framer-motion";
 
-export const TopNavbar = () => {
+export const TopNavbar = ({ onOpenBookDemo }) => {
     const { t } = useLanguage();
     const { playClick, playHover } = useUISound();
     const [isVisible, setIsVisible] = useState(true);
@@ -51,7 +51,7 @@ export const TopNavbar = () => {
                         }}
                         onMouseEnter={playHover}
                     >
-                        <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black" aria-hidden="true">A</div>
+                        <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black" aria-hidden="true">M</div>
                         <span className="font-bold tracking-widest hidden md:block">{t('nav.home').toUpperCase()}</span>
                     </div>
                     <div className="flex items-center gap-4 pointer-events-auto">
@@ -59,7 +59,7 @@ export const TopNavbar = () => {
                         <button
                             onClick={() => {
                                 playClick();
-                                window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank');
+                                if (onOpenBookDemo) onOpenBookDemo();
                             }}
                             onMouseEnter={playHover}
                             className="px-6 py-3 bg-white text-black text-xs font-black uppercase tracking-widest rounded-full hover:bg-cyan-400 transition-colors"

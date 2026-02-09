@@ -2,9 +2,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check } from 'lucide-react';
 import { workProjects } from '../data/workData';
 import { useLanguage } from '../context/LanguageContext';
+import { useBookDemo } from '../context/BookDemoContext';
 
 export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
     const { t } = useLanguage();
+    const { openBookDemo } = useBookDemo();
     const selectedProjects = workProjects.filter(p => selectedIds.includes(p.id));
 
     if (selectedProjects.length === 0) return null;
@@ -76,7 +78,7 @@ export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
                                 </div>
                                 <div className="pt-4 border-t border-white/10">
                                     <button
-                                        onClick={() => window.open('https://aether26.app.n8n.cloud/form/46ede1a5-eabb-4aa4-bf61-8153365a31bf', '_blank')}
+                                        onClick={openBookDemo}
                                         className="w-full py-3 bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-cyan-400 transition-colors"
                                     >
                                         {t('work.comparison.deploy')}

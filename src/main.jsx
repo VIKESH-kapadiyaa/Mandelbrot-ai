@@ -4,11 +4,17 @@ import './index.css'
 import App from './App.jsx'
 
 import { LanguageProvider } from './context/LanguageContext'
+import { BookDemoProvider } from './context/BookDemoContext'
+import { ChatBotProvider } from './context/ChatBotContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <LanguageProvider>
-      <App />
+      <BookDemoProvider>
+        <ChatBotProvider>
+          <App />
+        </ChatBotProvider>
+      </BookDemoProvider>
     </LanguageProvider>
   </StrictMode>,
 )
