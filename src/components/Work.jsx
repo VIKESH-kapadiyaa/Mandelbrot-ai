@@ -2,7 +2,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WorkCard } from './WorkCard';
 import { PokerDeck } from './PokerDeck';
-import { ComparisionTool } from './ComparisionTool';
+import { ComparisonTool } from './ComparisonTool';
 // import { WorkDetail } from './WorkDetail';
 import { workProjects } from '../data/workData';
 import ParallaxSection from './ParallaxSection';
@@ -238,7 +238,7 @@ export const Work = () => {
                 <AnimatePresence>
                     {/* Comparison Tool Drawer */}
                     {compareList.length > 0 && !selectedProject && (
-                        <ComparisionTool
+                        <ComparisonTool
                             selectedIds={compareList}
                             onClose={() => setCompareList([])}
                             onRemove={(id) => setCompareList(prev => prev.filter(p => p !== id))}

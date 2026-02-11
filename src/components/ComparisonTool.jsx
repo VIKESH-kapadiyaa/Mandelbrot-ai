@@ -4,7 +4,7 @@ import { workProjects } from '../data/workData';
 import { useLanguage } from '../context/LanguageContext';
 import { useBookDemo } from '../context/BookDemoContext';
 
-export const ComparisionTool = ({ selectedIds, onClose, onRemove }) => {
+export const ComparisonTool = ({ selectedIds, onClose, onRemove }) => {
     const { t } = useLanguage();
     const { openBookDemo } = useBookDemo();
     const selectedProjects = workProjects.filter(p => selectedIds.includes(p.id));

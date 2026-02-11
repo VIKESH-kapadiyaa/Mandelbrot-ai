@@ -52,7 +52,7 @@ export const TopNavbar = ({ onOpenBookDemo }) => {
                         onMouseEnter={playHover}
                     >
                         <div className="w-8 h-8 bg-white rounded flex items-center justify-center text-black font-black" aria-hidden="true">M</div>
-                        <span className="font-bold tracking-widest hidden md:block">{t('nav.home').toUpperCase()}</span>
+                        <span className="font-bold tracking-widest hidden md:block">{t('nav.home')}</span>
                     </div>
                     <div className="flex items-center gap-4 pointer-events-auto">
                         <LanguageSwitcher />
