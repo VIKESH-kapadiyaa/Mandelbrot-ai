@@ -311,7 +311,11 @@ const NeuralEngine = () => {
                                 <IconError />
                                 <div>
                                     <strong>Backend server is not running.</strong>
-                                    <p>Start it with: <code>cd backend && pip install fastapi uvicorn httpx && python -m uvicorn app.main:app --reload --port 8000</code></p>
+                                    {API_BASE.includes('localhost') || API_BASE.includes('127.0.0.1') ? (
+                                        <p>Start it with: <code>cd backend && pip install fastapi uvicorn httpx && python -m uvicorn app.main:app --reload --port 8000</code></p>
+                                    ) : (
+                                        <p>Unable to connect to production server at: <code>{API_BASE}</code>. Please disable ad-blockers or verify server status.</p>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>
