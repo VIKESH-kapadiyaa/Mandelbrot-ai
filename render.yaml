@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: mandelbrot-backend
+    env: python
+    region: ohio
+    plan: free
+    repo: https://github.com/VIKESH-kapadiyaa/Aerther-ai
+    rootDirectory: backend
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port 10000
+    buildCommand: pip install -r requirements.txt
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: MANDELBROT_GROQ_KEY_1
+        sync: false
+      - key: MANDELBROT_GROQ_KEY_2
+        sync: false
+      - key: MANDELBROT_GROQ_KEY_3
+        sync: false
+      - key: MANDELBROT_OPENROUTER_KEY
+        sync: false
+      - key: MANDELBROT_GEMINI_KEY
+        sync: false
+      - key: MANDELBROT_GPT_KEY
+        sync: false
