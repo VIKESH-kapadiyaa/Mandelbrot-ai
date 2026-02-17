@@ -1,15 +1,14 @@
-fastapi>=0.115.0
-uvicorn[standard]>=0.32.0
-pydantic>=2.10.0
-python-dotenv>=1.0.0
-httpx>=0.28.0
-# File Uploads
-python-multipart>=0.0.9
-# Data Processing
-pandas>=2.2.0
-openpyxl>=3.1.0
-pypdf>=4.0.0
-# AI & LangChain
-langchain>=0.3.0
-langgraph>=0.2.0
-google-generativeai>=0.8.0
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+httpx
+python-multipart
+pandas
+tabulate
+openpyxl
+pypdf
+langchain
+langgraph
+google-generativeai
+Markupsafe
