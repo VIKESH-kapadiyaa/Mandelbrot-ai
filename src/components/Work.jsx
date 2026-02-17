@@ -1,4 +1,5 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WorkCard } from './WorkCard';
 import { PokerDeck } from './PokerDeck';
@@ -20,6 +21,7 @@ export const Work = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [compareList, setCompareList] = useState([]); // List of IDs
     const { t } = useLanguage();
+    const navigate = useNavigate();
 
     const categories = ['All', ...new Set(workProjects.map(p => p.category).filter(Boolean))];
 
@@ -54,6 +56,17 @@ export const Work = () => {
     }, []);
 
     const handleSelectProject = (project) => {
+        // Navigate to dedicated page for Neural Workflow Engine
+        if (project.id === 'agent-1') {
+            navigate('/work/neural-engine');
+            return;
+        }
+
+        if (project.id === 'agent-2') {
+            navigate('/work/conversational-ai');
+            return;
+        }
+
         setIsDetailLoading(true);
         setTimeout(() => {
             setSelectedProject(project);

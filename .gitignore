@@ -30,3 +30,6 @@ dist-ssr
 .env.production
 .env.*
 !.env.example
+
+# Temporary Uploads
+backend/temp_uploads

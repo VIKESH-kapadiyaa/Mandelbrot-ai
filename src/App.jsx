@@ -1,51 +1,23 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { Hero } from "./components/Hero";
-import { ScrollVideo } from "./components/ScrollProgress";
-import { ChatWidget } from "./components/ChatWidget";
-import { BookingModal } from "./components/BookingModal";
+import { Routes, Route } from "react-router-dom";
 import AntigravityBackground from "./components/AntigravityBackground";
-import RefundPolicy from "./components/RefundPolicy";
-import PrivacyModal from "./components/PrivacyModal";
-import TermsOfService from "./components/TermsOfService";
-import AiUsePolicy from "./components/AiUsePolicy";
-import BookDemo from "./components/BookDemo";
-import ChatBot from "./components/ChatBot";
+import { ScrollVideo } from "./components/ScrollProgress";
 import { AnimatePresence, motion } from "framer-motion";
-import RevealOnScroll from "./components/RevealOnScroll";
-import SectionLoader from "./components/SectionLoader";
-
-// Lazy Load Sections
-const Services = lazy(() => import("./components/Services").then(module => ({ default: module.Services })));
-const Pricing = lazy(() => import("./components/Pricing").then(module => ({ default: module.Pricing })));
-const Footer = lazy(() => import("./components/Footer").then(module => ({ default: module.Footer })));
-const Process = lazy(() => import("./components/Process").then(module => ({ default: module.Process })));
-const Architecture = lazy(() => import("./components/Architecture").then(module => ({ default: module.Architecture })));
-const Work = lazy(() => import("./components/Work").then(module => ({ default: module.Work })));
-const Testimonials = lazy(() => import("./components/Testimonials").then(module => ({ default: module.Testimonials })));
-
-import { LanguageSwitcher } from "./components/LanguageSwitcher";
-import { useLanguage } from "./context/LanguageContext";
-import { useUISound } from "./hooks/useUISound";
-import { useBookDemo } from "./context/BookDemoContext";
-import { useChatBot } from "./context/ChatBotContext";
-import { StatusDashboard } from "./components/StatusDashboard";
 
 import { HelmetProvider, Helmet } from 'react-helmet-async';
-import MobileDock from "./components/MobileDock";
-import { TopNavbar } from "./components/TopNavbar";
+
+import { useLanguage } from "./context/LanguageContext";
+import { useUISound } from "./hooks/useUISound";
+
+// Pages
+import Home from "./pages/Home";
+const NeuralEngine = lazy(() => import("./pages/NeuralEngine"));
+const ConversationalAI = lazy(() => import("./pages/ConversationalAI"));
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [isDashboardOpen, setIsDashboardOpen] = useState(false);
-  const [isRefundPolicyOpen, setIsRefundPolicyOpen] = useState(false);
-  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
-  const [isTermsOfServiceOpen, setIsTermsOfServiceOpen] = useState(false);
-  const [isAiUsePolicyOpen, setIsAiUsePolicyOpen] = useState(false);
-  const { isBookDemoOpen, openBookDemo, closeBookDemo } = useBookDemo();
-  const { isChatBotOpen, closeChatBot } = useChatBot();
   const { t } = useLanguage();
-  const { playClick, playHover } = useUISound();
+  const { playClick } = useUISound();
 
   // Global Click Sound
   useEffect(() => {
@@ -62,7 +34,7 @@ const App = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.razorpay.com https://lumberjack-cx.razorpay.com https://api.groq.com https://openrouter.ai; frame-src https://api.razorpay.com;" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.razorpay.com https://lumberjack-cx.razorpay.com https://api.groq.com https://openrouter.ai http://localhost:8000; frame-src https://api.razorpay.com;" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
       </Helmet>
       <div className="bg-[#020202] min-h-screen text-white overflow-x-hidden selection:bg-cyan-500/30 relative">
@@ -72,8 +44,6 @@ const App = () => {
         >
           Skip to Content
         </a>
-        <AntigravityBackground />
-        <ScrollVideo />
 
         <AnimatePresence>
           {isLoading ? (
@@ -100,88 +70,37 @@ const App = () => {
             </motion.div>
           ) : (
             <main id="main-content">
-              {/* Navigation Overlay */}
-              <TopNavbar onOpenBookDemo={openBookDemo} />
-
-              <RevealOnScroll direction="up" delay={0.2}>
-                <section id="hero" className="snap-start">
-                  <Hero setIsBookingOpen={setIsBookingOpen} setIsDashboardOpen={setIsDashboardOpen} />
-                </section>
-              </RevealOnScroll>
-
-              <div className="h-20" /> {/* Spacer */}
-
-              <div className="h-20" /> {/* Spacer */}
-
-              <Suspense fallback={<SectionLoader />}>
-                <RevealOnScroll direction="up" delay={0.1}>
-                  <section id="services" className="snap-start">
-                    <Services />
-                  </section>
-                </RevealOnScroll>
-              </Suspense>
-              <div className="h-20" /> {/* Spacer */}
-              {/* Process Section can be added here as a separate component */}
-              {/* Process Section */}
-              <Suspense fallback={<SectionLoader />}>
-                <RevealOnScroll direction="up" delay={0.1}>
-                  <Process />
-                </RevealOnScroll>
-              </Suspense>
-
-              <Suspense fallback={<SectionLoader />}>
-                <RevealOnScroll direction="up" delay={0.1}>
-                  <Architecture />
-                </RevealOnScroll>
-              </Suspense>
-
-              <Suspense fallback={<SectionLoader />}>
-                <RevealOnScroll direction="up" delay={0.1}>
-                  <Testimonials />
-                </RevealOnScroll>
-              </Suspense>
-
-              <div className="h-20" /> {/* Spacer */}
-              <div className="h-20" /> {/* Spacer */}
-              <Suspense fallback={<SectionLoader />}>
-                <RevealOnScroll direction="up" delay={0.1}>
-                  <section id="work" className="snap-start">
-                    <Work />
-                  </section>
-                </RevealOnScroll>
-              </Suspense>
-
-              <div className="h-20" /> {/* Spacer */}
-              <Suspense fallback={<SectionLoader />}>
-                <RevealOnScroll direction="up" delay={0.1}>
-                  <section id="pricing" className="snap-start">
-                    <Pricing />
-                  </section>
-                </RevealOnScroll>
-              </Suspense>
-
-              <Suspense fallback={<div className="h-20 bg-black" />}>
-                <RevealOnScroll direction="up" delay={0.1}>
-                  <Footer
-                    onOpenRefundPolicy={() => setIsRefundPolicyOpen(true)}
-                    onOpenPrivacyPolicy={() => setIsPrivacyPolicyOpen(true)}
-                    onOpenTermsOfService={() => setIsTermsOfServiceOpen(true)}
-                    onOpenAiUsePolicy={() => setIsAiUsePolicyOpen(true)}
-                  />
-                </RevealOnScroll>
-              </Suspense>
-              <ChatWidget />
-              <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
-              <AnimatePresence>
-                {isDashboardOpen && <StatusDashboard key="dashboard" onClose={() => setIsDashboardOpen(false)} />}
-                <RefundPolicy key="refund" isOpen={isRefundPolicyOpen} onClose={() => setIsRefundPolicyOpen(false)} />
-                <PrivacyModal key="privacy" isOpen={isPrivacyPolicyOpen} onClose={() => setIsPrivacyPolicyOpen(false)} />
-                <TermsOfService key="terms" isOpen={isTermsOfServiceOpen} onClose={() => setIsTermsOfServiceOpen(false)} />
-                <AiUsePolicy key="ai-policy" isOpen={isAiUsePolicyOpen} onClose={() => setIsAiUsePolicyOpen(false)} />
-                <BookDemo key="book-demo" isOpen={isBookDemoOpen} onClose={closeBookDemo} />
-                <ChatBot key="chatbot" isOpen={isChatBotOpen} onClose={closeChatBot} />
-              </AnimatePresence>
-              <MobileDock />
+              <Routes>
+                <Route path="/" element={
+                  <>
+                    <AntigravityBackground />
+                    <ScrollVideo />
+                    <Home />
+                  </>
+                } />
+                <Route path="/work/conversational-ai" element={
+                  <Suspense fallback={
+                    <div className="fixed inset-0 bg-[#020202] flex items-center justify-center">
+                      <div className="text-xs font-mono uppercase tracking-[0.4em] text-purple-500 animate-pulse">
+                        Booting Context Processor...
+                      </div>
+                    </div>
+                  }>
+                    <ConversationalAI />
+                  </Suspense>
+                } />
+                <Route path="/work/neural-engine" element={
+                  <Suspense fallback={
+                    <div className="fixed inset-0 bg-[#020202] flex items-center justify-center">
+                      <div className="text-xs font-mono uppercase tracking-[0.4em] text-cyan-500 animate-pulse">
+                        Loading Neural Engine...
+                      </div>
+                    </div>
+                  }>
+                    <NeuralEngine />
+                  </Suspense>
+                } />
+              </Routes>
             </main>
           )}
         </AnimatePresence>
