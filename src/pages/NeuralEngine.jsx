@@ -6,7 +6,7 @@ import { TopNavbar } from '../components/TopNavbar';
 import './NeuralEngine.css';
 
 // ─── API Config ──────────────────────────────────────────────────────────────
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 const IconTerminal = () => (

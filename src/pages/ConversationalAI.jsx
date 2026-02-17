@@ -50,7 +50,9 @@ const ConversationalAI = () => {
             }
 
             try {
-                const response = await fetch('http://localhost:8000/api/upload', {
+                // Use dynamic API URL for production support
+                const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+                const response = await fetch(`${API_BASE}/api/upload`, {
                     method: 'POST',
                     body: formData,
                 });
@@ -96,7 +98,8 @@ const ConversationalAI = () => {
         setIsTyping(true);
 
         try {
-            const response = await fetch('http://localhost:8000/api/chat-rag', {
+            const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+            const response = await fetch(`${API_BASE}/api/chat-rag`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

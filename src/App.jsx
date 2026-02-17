@@ -34,7 +34,7 @@ const App = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.razorpay.com https://lumberjack-cx.razorpay.com https://api.groq.com https://openrouter.ai http://localhost:8000; frame-src https://api.razorpay.com;" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://checkout.razorpay.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src *; frame-src *;" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
       </Helmet>
       <div className="bg-[#020202] min-h-screen text-white overflow-x-hidden selection:bg-cyan-500/30 relative">
