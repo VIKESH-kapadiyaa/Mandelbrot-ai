@@ -6,18 +6,21 @@ import remarkGfm from 'remark-gfm';
 import ChatBotAdmin from './ChatBotAdmin';
 
 // Neural Node Visual (Left Panel)
-const NeuralNode = ({ x, y }) => (
-    <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{
-            opacity: [0, 1, 0.5, 0],
-            scale: [0, 1.5, 1, 0],
-        }}
-        transition={{ duration: 2, repeat: Infinity, repeatDelay: Math.random() * 2 }}
-        className="absolute w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"
-        style={{ left: x, top: y }}
-    />
-);
+const NeuralNode = ({ x, y }) => {
+    const randomDelay = React.useMemo(() => Math.random() * 2, []);
+    return (
+        <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{
+                opacity: [0, 1, 0.5, 0],
+                scale: [0, 1.5, 1, 0],
+            }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: randomDelay }}
+            className="absolute w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_10px_#a855f7]"
+            style={{ left: x, top: y }}
+        />
+    );
+};
 
 const ChatBot = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState([

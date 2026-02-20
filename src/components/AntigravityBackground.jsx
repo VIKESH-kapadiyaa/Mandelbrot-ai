@@ -1,5 +1,91 @@
 import React, { useEffect, useRef } from 'react';
 
+// Configuration
+const BLOB_RADIUS = 100;
+const EASE = 0.12;
+
+// Tail Configuration
+const TAIL_LENGTH = 12;
+const TAIL_GRAVITY = 3; // Pixels down per frame of lag
+
+class Particle {
+    constructor(canvas, colors) {
+        this.ctx = canvas.getContext('2d');
+        this.canvas = canvas;
+
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+
+        this.history = []; // For trail
+
+        this.angle = Math.random() * Math.PI * 2;
+        this.orbitRadius = Math.sqrt(Math.random()) * BLOB_RADIUS;
+        this.orbitSpeed = (Math.random() - 0.5) * 0.02;
+
+        this.size = Math.random() * 8 + 4;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.1;
+        this.visible = true;
+    }
+
+    draw() {
+        const { ctx } = this;
+        // DRAW TAIL
+        if (this.history.length > 2) {
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            for (let i = 0; i < this.history.length; i++) {
+                const point = this.history[i];
+                // "Falling" effect: larger Y offset for older points
+                const fallOffset = i * TAIL_GRAVITY;
+                ctx.lineTo(point.x, point.y + fallOffset);
+            }
+            // Tail Style
+            ctx.strokeStyle = this.color;
+            ctx.globalAlpha = 0.5; // Faint tail
+            ctx.lineWidth = 2; // Thicker
+            ctx.stroke();
+        }
+
+        // Particle Body Opacity
+        ctx.globalAlpha = 0.4;
+
+        ctx.setTransform(Math.cos(this.rotation), Math.sin(this.rotation), -Math.sin(this.rotation), Math.cos(this.rotation), this.x, this.y);
+        ctx.fillStyle = this.color;
+
+        ctx.beginPath();
+        ctx.moveTo(0, -this.size / 2);
+        ctx.lineTo(this.size / 2, this.size / 2);
+        ctx.lineTo(-this.size / 2, this.size / 2);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    update(time, mouse, mouseSpeed) {
+        // Update History (unshift new position)
+        this.history.unshift({ x: this.x, y: this.y });
+        if (this.history.length > TAIL_LENGTH) {
+            this.history.pop();
+        }
+
+        // MODE: PURE ROTATING CURSOR BLOB
+        this.angle += this.orbitSpeed;
+
+        const isStationary = mouseSpeed < 2;
+        const pulse = isStationary ? (1 + Math.sin(time * 0.04) * 0.05) : 1;
+
+        const targetX = mouse.x + Math.cos(this.angle) * this.orbitRadius * pulse;
+        const targetY = mouse.y + Math.sin(this.angle) * this.orbitRadius * pulse;
+
+        // LERP
+        this.x += (targetX - this.x) * EASE;
+        this.y += (targetY - this.y) * EASE;
+
+        this.rotation += this.rotationSpeed;
+    }
+}
+
 const AntigravityBackground = () => {
     const canvasRef = useRef(null);
     const colors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
@@ -14,94 +100,12 @@ const AntigravityBackground = () => {
         const lastMouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
         let mouseSpeed = 0;
 
-        // Configuration
-        const particleCount = window.innerWidth < 768 ? 40 : 100;
-        const blobRadius = 100;
-        const ease = 0.12;
-
-        // Tail Configuration
-        const tailLength = 12;
-        const tailGravity = 3; // Pixels down per frame of lag
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-
-                this.history = []; // For trail
-
-                this.angle = Math.random() * Math.PI * 2;
-                this.orbitRadius = Math.sqrt(Math.random()) * blobRadius;
-                this.orbitSpeed = (Math.random() - 0.5) * 0.02;
-
-                this.size = Math.random() * 8 + 4;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.rotation = Math.random() * Math.PI * 2;
-                this.rotationSpeed = (Math.random() - 0.5) * 0.1;
-                this.visible = true;
-            }
-
-            draw() {
-                // DRAW TAIL
-                if (this.history.length > 2) {
-                    ctx.beginPath();
-                    ctx.moveTo(this.x, this.y);
-                    for (let i = 0; i < this.history.length; i++) {
-                        const point = this.history[i];
-                        // "Falling" effect: larger Y offset for older points
-                        const fallOffset = i * tailGravity;
-                        ctx.lineTo(point.x, point.y + fallOffset);
-                    }
-                    // Tail Style
-                    ctx.strokeStyle = this.color;
-                    ctx.globalAlpha = 0.5; // Faint tail
-                    ctx.lineWidth = 2; // Thicker
-                    ctx.stroke();
-                }
-
-                // Particle Body Opacity
-                ctx.globalAlpha = 0.4;
-
-                ctx.setTransform(Math.cos(this.rotation), Math.sin(this.rotation), -Math.sin(this.rotation), Math.cos(this.rotation), this.x, this.y);
-                ctx.fillStyle = this.color;
-
-                ctx.beginPath();
-                ctx.moveTo(0, -this.size / 2);
-                ctx.lineTo(this.size / 2, this.size / 2);
-                ctx.lineTo(-this.size / 2, this.size / 2);
-                ctx.closePath();
-                ctx.fill();
-            }
-
-            update(time) {
-                // Update History (unshift new position)
-                this.history.unshift({ x: this.x, y: this.y });
-                if (this.history.length > tailLength) {
-                    this.history.pop();
-                }
-
-                // MODE: PURE ROTATING CURSOR BLOB
-                this.angle += this.orbitSpeed;
-
-                const isStationary = mouseSpeed < 2;
-                const pulse = isStationary ? (1 + Math.sin(time * 0.04) * 0.05) : 1;
-
-                const targetX = mouse.x + Math.cos(this.angle) * this.orbitRadius * pulse;
-                const targetY = mouse.y + Math.sin(this.angle) * this.orbitRadius * pulse;
-
-                // LERP
-                this.x += (targetX - this.x) * ease;
-                this.y += (targetY - this.y) * ease;
-
-                this.rotation += this.rotationSpeed;
-            }
-        }
-
         let particles = [];
         const initParticles = () => {
             particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
+            const count = window.innerWidth < 768 ? 40 : 100;
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle(canvas, colors));
             }
         };
 
@@ -118,7 +122,7 @@ const AntigravityBackground = () => {
             lastMouse.y = mouse.y;
 
             particles.forEach(p => {
-                p.update(time);
+                p.update(time, mouse, mouseSpeed);
                 p.draw();
             });
 

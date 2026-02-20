@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { PricingCalculator } from './PricingCalculator';
-import ParallaxSection from './ParallaxSection';
+
 import { useLanguage } from "../context/LanguageContext";
 
 const CheckIcon = ({ className }) => (
@@ -12,24 +12,8 @@ const CheckIcon = ({ className }) => (
 export const Pricing = () => {
     const { t } = useLanguage();
 
-    const loadRazorpay = () => {
-        return new Promise((resolve, reject) => {
-            if (window.Razorpay) {
-                resolve();
-                return;
-            }
-            const script = document.createElement('script');
-            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-            script.onload = () => resolve();
-            script.onerror = () => reject(new Error('Failed to load Razorpay SDK'));
-            document.head.appendChild(script);
-        });
-    };
-
-    const handlePayment = async (amount, planName) => {
-        try {
-            await loadRazorpay();
-        } catch {
+    const handlePayment = (amount, planName) => {
+        if (!window.Razorpay) {
             alert("Razorpay SDK failed to load. Please check your connection.");
             return;
         }

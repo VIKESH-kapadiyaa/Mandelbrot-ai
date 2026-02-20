@@ -1,0 +1,65 @@
+{
+    "mcpServers": {
+        "google-drive": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-google-drive"
+            ]
+        },
+        "github": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-github"
+            ]
+        },
+        "slack": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-slack"
+            ]
+        },
+        "stripe": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-stripe"
+            ]
+        },
+        "gmail": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-gmail"
+            ]
+        },
+        "postgres": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-postgres",
+                "postgresql://user:password@localhost:5432/mandelbrot"
+            ]
+        },
+        "brave-search": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-brave-search"
+            ]
+        },
+        "linear": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-linear"
+            ]
+        },
+        "puppeteer": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-puppeteer"
+            ]
+        },
+        "local-shell": {
+            "command": "uvx",
+            "args": [
+                "@modelcontextprotocol/server-bash"
+            ]
+        }
+    }
+}

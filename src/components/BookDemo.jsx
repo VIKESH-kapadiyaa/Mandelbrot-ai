@@ -18,11 +18,15 @@ const countries = [
 ];
 
 const FireParticle = ({ x, y, edge, onComplete }) => {
-    const sizeBase = Math.random() * 20 + 10;
-    const duration = Math.random() * 0.6 + 0.4;
-    let xDrift = (Math.random() - 0.5) * 60;
-    let yEnd = -100 - Math.random() * 80;
-    const initialScale = Math.random() * 0.5 + 0.8;
+    const { sizeBase, duration, xDrift, yEnd, initialScale } = React.useMemo(() => {
+        return {
+            sizeBase: Math.random() * 20 + 10,
+            duration: Math.random() * 0.6 + 0.4,
+            xDrift: (Math.random() - 0.5) * 60,
+            yEnd: -100 - Math.random() * 80,
+            initialScale: Math.random() * 0.5 + 0.8
+        };
+    }, []);
 
     useEffect(() => {
         const timer = setTimeout(onComplete, duration * 1000);

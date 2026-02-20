@@ -1,5 +1,19 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+const InputRange = ({ label, value, setValue, min, max, step, suffix = "" }) => (
+    <div className="space-y-3">
+        <div className="flex justify-between text-xs font-bold tracking-widest text-slate-400">
+            <span>{label}</span>
+            <span className="text-white font-mono">{value}{suffix}</span>
+        </div>
+        <input
+            type="range" min={min} max={max} step={step} value={value}
+            onChange={(e) => setValue(Number(e.target.value))}
+            className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-cyan-500 hover:accent-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
+        />
+    </div>
+);
 
 export const PricingCalculator = () => {
     // Inputs
@@ -12,57 +26,30 @@ export const PricingCalculator = () => {
     const baseSubscription = 750; // Solo Founder Tier Base
     const costPerTask = 0.05; // Compute cost per task avg
 
-    // Outputs
-    const [metrics, setMetrics] = useState({
-        monthlyHumanCost: 0,
-        monthlyAiCost: 0,
-        monthlySavings: 0,
-        annualSavings: 0,
-        efficiencyGain: 0,
-        hoursSaved: 0
-    });
+    // Human Cost Calculation
+    const totalHumanHours = (tasksPerMonth * minsPerTask) / 60;
+    const humanCost = totalHumanHours * employeeRate;
 
-    useEffect(() => {
-        // Human Cost Calculation
-        const totalHumanHours = (tasksPerMonth * minsPerTask) / 60;
-        const humanCost = totalHumanHours * employeeRate;
+    // AI Cost Calculation
+    // Assuming 1 agent covers baseline, scalable compute per task
+    const aiComputeCost = tasksPerMonth * costPerTask;
+    const aiTotalCost = (baseSubscription * activeAgents) + aiComputeCost;
 
-        // AI Cost Calculation
-        // Assuming 1 agent covers baseline, scalable compute per task
-        const aiComputeCost = tasksPerMonth * costPerTask;
-        const aiTotalCost = (baseSubscription * activeAgents) + aiComputeCost;
+    // Savings
+    const mSavings = Math.max(0, humanCost - aiTotalCost);
+    const aSavings = mSavings * 12;
 
-        // Savings
-        const mSavings = Math.max(0, humanCost - aiTotalCost);
-        const aSavings = mSavings * 12;
+    // Efficiency (ROI %)
+    const efficiency = aiTotalCost > 0 ? ((humanCost - aiTotalCost) / aiTotalCost) * 100 : 0;
 
-        // Efficiency (ROI %)
-        const efficiency = aiTotalCost > 0 ? ((humanCost - aiTotalCost) / aiTotalCost) * 100 : 0;
-
-        setMetrics({
-            monthlyHumanCost: Math.floor(humanCost),
-            monthlyAiCost: Math.floor(aiTotalCost),
-            monthlySavings: Math.floor(mSavings),
-            annualSavings: Math.floor(aSavings),
-            efficiencyGain: Math.floor(efficiency),
-            hoursSaved: Math.floor(totalHumanHours)
-        });
-
-    }, [employeeRate, tasksPerMonth, minsPerTask, activeAgents]);
-
-    const InputRange = ({ label, value, setValue, min, max, step, suffix = "" }) => (
-        <div className="space-y-3">
-            <div className="flex justify-between text-xs font-bold tracking-widest text-slate-400">
-                <span>{label}</span>
-                <span className="text-white font-mono">{value}{suffix}</span>
-            </div>
-            <input
-                type="range" min={min} max={max} step={step} value={value}
-                onChange={(e) => setValue(Number(e.target.value))}
-                className="w-full h-1 bg-white/10 rounded-lg appearance-none cursor-pointer accent-cyan-500 hover:accent-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all"
-            />
-        </div>
-    );
+    const metrics = {
+        monthlyHumanCost: Math.floor(humanCost),
+        monthlyAiCost: Math.floor(aiTotalCost),
+        monthlySavings: Math.floor(mSavings),
+        annualSavings: Math.floor(aSavings),
+        efficiencyGain: Math.floor(efficiency),
+        hoursSaved: Math.floor(totalHumanHours)
+    };
 
     return (
         <div className="bg-[#0A0A0A] border border-white/10 rounded-3xl overflow-hidden shadow-2xl">

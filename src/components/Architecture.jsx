@@ -1,39 +1,45 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 
-const ArchitectureNode = ({ title, icon, position, delay, color = "cyan" }) => (
-    <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ delay, duration: 0.5, type: "spring" }}
-        animate={{
-            y: [0, -15, 0],
-            transition: {
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: Math.random() * 2
-            }
-        }}
-        className={`absolute ${position} w-32 h-32 md:w-40 md:h-40 flex flex-col items-center justify-center bg-black border border-${color}-500/30 rounded-full backdrop-blur-md z-10 shadow-[0_0_50px_rgba(34,211,238,0.15)] group hover:border-${color}-400 transition-colors`}
-    >
-        <div className="text-4xl mb-3 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">{icon}</div>
-        <div className={`text-xs font-bold uppercase tracking-widest text-${color}-400 text-center px-2 group-hover:text-white transition-colors`}>{title}</div>
+import { useMemo } from 'react';
 
-        {/* Orbiting Ring - Outer */}
+const ArchitectureNode = ({ title, icon, position, delay, color = "cyan" }) => {
+    const randomDelay = useMemo(() => Math.random() * 2, []);
+
+    return (
         <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className={`absolute inset-[-10%] border-t border-l border-${color}-500/30 rounded-full`}
-        />
-        {/* Orbiting Ring - Inner Reverse */}
-        <motion.div
-            animate={{ rotate: -360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-            className={`absolute inset-[-5%] border-b border-r border-${color}-500/20 rounded-full`}
-        />
-    </motion.div>
-);
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay, duration: 0.5, type: "spring" }}
+            animate={{
+                y: [0, -15, 0],
+                transition: {
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: randomDelay
+                }
+            }}
+            className={`absolute ${position} w-32 h-32 md:w-40 md:h-40 flex flex-col items-center justify-center bg-black border border-${color}-500/30 rounded-full backdrop-blur-md z-10 shadow-[0_0_50px_rgba(34,211,238,0.15)] group hover:border-${color}-400 transition-colors`}
+        >
+            <div className="text-4xl mb-3 filter drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">{icon}</div>
+            <div className={`text-xs font-bold uppercase tracking-widest text-${color}-400 text-center px-2 group-hover:text-white transition-colors`}>{title}</div>
+
+            {/* Orbiting Ring - Outer */}
+            <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className={`absolute inset-[-10%] border-t border-l border-${color}-500/30 rounded-full`}
+            />
+            {/* Orbiting Ring - Inner Reverse */}
+            <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className={`absolute inset-[-5%] border-b border-r border-${color}-500/20 rounded-full`}
+            />
+        </motion.div>
+    );
+};
 
 const DataStream = ({ path, delay = 0, duration = 3 }) => (
     <motion.path

@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useBookDemo } from '../context/BookDemoContext';
 import { TopNavbar } from '../components/TopNavbar';
 import './NeuralEngine.css';
+import { NeuralOrchestrator } from '../lib/engine/orchestrator';
 
-// ─── API Config ──────────────────────────────────────────────────────────────
+// ─── Constants ───
 const API_BASE = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+const orchestrator = new NeuralOrchestrator();
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 const IconTerminal = () => (
@@ -54,7 +56,8 @@ const NeuralEngine = () => {
     const [prompt, setPrompt] = useState('');
     const [isRunning, setIsRunning] = useState(false);
     const [backendStatus, setBackendStatus] = useState('checking'); // checking | online | offline
-    const [currentWorkflow, setCurrentWorkflow] = useState(null);
+    const [currentWorkflow, setCurrentWorkflow] = useState(null); // String name
+    const [planData, setPlanData] = useState(null); // New state for full Plan object
     const [tasks, setTasks] = useState([]);
     const [logs, setLogs] = useState([]);
     const [stepOutputs, setStepOutputs] = useState({}); // { stepId: output }
@@ -86,6 +89,35 @@ const NeuralEngine = () => {
         logEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [logs]);
 
+    // Orchestrator State Polling
+    useEffect(() => {
+        let interval;
+        if (planData?.status === 'executing') {
+            interval = setInterval(() => {
+                const state = orchestrator.getPlanState();
+                if (state) {
+                    setPlanData({ ...state });
+                    // Sync tasks for the left panel
+                    setTasks(state.steps.map(s => ({
+                        id: s.id,
+                        action: s.description,
+                        tool: s.tool.name,
+                        status: s.status === 'completed' ? 'done' : (s.status === 'failed' ? 'error' : s.status)
+                    })));
+
+                    // Check for completion
+                    if (state.status === 'completed' || state.status === 'failed') {
+                        setIsRunning(false);
+                        clearInterval(interval);
+                        addLog(state.status === 'completed' ? 'success' : 'error',
+                            state.status === 'completed' ? 'Mission Complete.' : 'Mission Failed.');
+                    }
+                }
+            }, 500);
+        }
+        return () => clearInterval(interval);
+    }, [planData?.status, addLog]);
+
     // Timer
     useEffect(() => {
         if (isRunning) {
@@ -102,125 +134,79 @@ const NeuralEngine = () => {
     }, []);
 
     // ─── REAL Execution ────────────────────────────────────────────────────────
-    const executeWorkflow = useCallback(async (inputPrompt) => {
-        setCurrentWorkflow(inputPrompt);
-        setTasks([]);
-        setLogs([]);
-        setStepOutputs({});
-        setSelectedOutput(null);
-        setElapsedTime(0);
+
+    // ─── Orchestrator Logic ───
+    const handleOrchestratorSubmit = async (e, overridePrompt = null) => {
+        if (e) e.preventDefault();
+        const activePrompt = overridePrompt || prompt;
+        if (!activePrompt.trim() || isRunning) return;
+
+        if (overridePrompt) setPrompt(overridePrompt);
+
         setIsRunning(true);
-
-        addLog('system', '╔═══════════════════════════════════════════════════╗');
-        addLog('system', '║  NEURAL WORKFLOW ENGINE v3.0 — LIVE MODE          ║');
-        addLog('system', '║  Powered by Gemini (via OpenRouter) + FastAPI     ║');
-        addLog('system', '╚═══════════════════════════════════════════════════╝');
-
-        // ── STEP 1: Plan ──
-        addLog('info', `► Received: "${inputPrompt}"`);
-        addLog('info', '► Sending to AI Planner...');
+        // Using existing addLog function signature: (level, message)
+        addLog('info', `Initializing Neural Orchestrator for: "${activePrompt}"...`);
 
         try {
-            const planRes = await fetch(`${API_BASE}/api/plan`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ prompt: inputPrompt }),
-            });
+            // Stage 1: Generate Plan
+            const plan = await orchestrator.generatePlan(activePrompt);
+            setPlanData({ ...plan });
 
-            if (!planRes.ok) throw new Error(`Plan failed: ${planRes.status}`);
-
-            const plan = await planRes.json();
-            addLog('success', `✓ AI generated plan: "${plan.workflow_name}"`);
-            addLog('success', `✓ ${plan.steps.length} steps identified`);
-            addLog('info', '─'.repeat(52));
-
-            // Set tasks from AI plan
-            const initialTasks = plan.steps.map(s => ({
+            // Populate tasks immediately for visualization
+            setTasks(plan.steps.map(s => ({
                 id: s.id,
-                tool: s.tool,
-                action: s.action,
-                input_description: s.input_description,
-                status: 'pending',
-            }));
-            setTasks(initialTasks);
+                action: s.description,
+                tool: s.tool.name, // Display name
+                status: 'pending'
+            })));
 
-            // ── STEP 2: Execute each step ──
-            addLog('warn', '► Beginning execution...');
+            addLog('success', `Plan generated with ${plan.steps.length} steps.`);
 
-            for (let i = 0; i < plan.steps.length; i++) {
-                const step = plan.steps[i];
+            // Stage 2: Request Approval
+            const planWithApproval = orchestrator.requestApproval();
+            setPlanData({ ...planWithApproval }); // Triggers UI Modal
 
-                // Mark as executing
-                setTasks(prev => prev.map((t, idx) =>
-                    idx === i ? { ...t, status: 'executing' } : t
-                ));
-
-                addLog('info', `[${i + 1}/${plan.steps.length}] ${step.action}`);
-                addLog('tool', `    ↳ Tool: ${step.tool}`);
-
-                try {
-                    const execRes = await fetch(`${API_BASE}/api/execute-step`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            workflow_id: plan.workflow_id,
-                            step_id: step.id,
-                            tool: step.tool,
-                            action: step.action,
-                            context: inputPrompt,
-                        }),
-                    });
-
-                    if (!execRes.ok) throw new Error(`Step ${step.id} failed: ${execRes.status}`);
-
-                    const result = await execRes.json();
-
-                    if (result.status === 'completed') {
-                        // Store real output
-                        setStepOutputs(prev => ({ ...prev, [step.id]: result.output }));
-
-                        // Mark as done
-                        setTasks(prev => prev.map((t, idx) =>
-                            idx === i ? { ...t, status: 'done' } : t
-                        ));
-                        addLog('success', `    ✓ Completed — output generated (${result.output.length} chars)`);
-                    } else {
-                        throw new Error(result.error || 'Unknown error');
-                    }
-                } catch (stepError) {
-                    // Mark as error but continue
-                    setTasks(prev => prev.map((t, idx) =>
-                        idx === i ? { ...t, status: 'error' } : t
-                    ));
-                    addLog('error', `    ✗ Error: ${stepError.message}`);
-                }
+            // Check if immediate execution is possible (no write tools)
+            const needsApproval = planWithApproval.steps.some(s => s.requiresApproval);
+            if (!needsApproval) {
+                console.log("Plan ready for review.");
             }
-
-            addLog('info', '─'.repeat(52));
-            addLog('success', '★ WORKFLOW COMPLETE — All steps executed');
 
         } catch (error) {
-            addLog('error', `✗ Fatal error: ${error.message}`);
-            if (backendStatus === 'offline') {
-                addLog('warn', '⚠ Backend server is offline. Start it with: python backend/app/main.py');
-            }
+            console.error("Orchestrator Error:", error);
+            addLog('error', `Orchestrator Failed: ${error.message}`);
+            setIsRunning(false);
         }
-
-        setIsRunning(false);
-        clearInterval(timerRef.current);
-    }, [addLog, backendStatus]);
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!prompt.trim() || isRunning) return;
-        const p = prompt.trim();
-        setPrompt('');
-        executeWorkflow(p);
     };
 
+    const handlePlanApproval = async (approved) => {
+        if (!planData) return;
+
+        if (approved) {
+            addLog('intro', `Plan Approved. Executing sequence...`);
+
+            // Update UI to 'executing'
+            setPlanData(prev => ({ ...prev, status: 'executing' }));
+
+            // Trigger Orchestrator Execution (Async - Polling handles UI updates)
+            orchestrator.handleApproval(true).catch(err => {
+                console.error("Orchestrator Execution Error:", err);
+                addLog('error', `Execution failed to start: ${err.message}`);
+                setIsRunning(false);
+            });
+
+        } else {
+            addLog('warning', `Plan Rejected by user.`);
+            setIsRunning(false);
+            setPlanData(null);
+        }
+    };
+
+
+
+
     const handleQuickPrompt = (text) => {
-        if (isRunning) return;
-        executeWorkflow(text);
+        handleOrchestratorSubmit(null, text);
     };
 
     const copyToClipboard = (text, id) => {
@@ -392,6 +378,7 @@ const NeuralEngine = () => {
                     </motion.aside>
 
                     {/* ── Center: Command ── */}
+                    {/* ── Center: Command ── */}
                     <motion.div
                         className="ne-panel ne-panel--center"
                         initial={{ opacity: 0, y: 20 }}
@@ -404,7 +391,8 @@ const NeuralEngine = () => {
                                 <span>Mission Directive</span>
                                 <span className="ne-command__mode">LIVE AI</span>
                             </div>
-                            <form onSubmit={handleSubmit} className="ne-command__form">
+
+                            <form onSubmit={handleOrchestratorSubmit} className="ne-command__form">
                                 <input
                                     type="text"
                                     className="ne-command__input"
@@ -427,6 +415,63 @@ const NeuralEngine = () => {
                                 </button>
                             </form>
                         </div>
+
+                        {/* ─── Plan Approval Modal (Neon Glass) ─── */}
+                        <AnimatePresence>
+                            {planData?.status === 'awaiting_approval' && (
+                                <motion.div
+                                    className="ne-approval-modal"
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                >
+                                    <div className="ne-approval-content">
+                                        <div className="ne-approval-header">
+                                            <IconBrain />
+                                            <h3>Mission Plan Approval</h3>
+                                        </div>
+                                        <div className="ne-approval-body">
+                                            <p className="ne-approval-desc">The Neural Engine has proposed the following execution plan for: <strong>"{planData.description}"</strong></p>
+
+                                            <div className="ne-approval-steps">
+                                                {planData.steps.map((step) => (
+                                                    <div key={step.id} className={`ne-approval-step ${step.requiresApproval ? 'ne-step-warning' : ''}`} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '12px', padding: '12px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px' }}>
+                                                        <div className="ne-step-icon" style={{ fontSize: '1.2rem', marginTop: '2px' }}>
+                                                            {step.requiresApproval ? '⚠️' : '✅'}
+                                                        </div>
+                                                        <div className="ne-step-info" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                            <span className="ne-step-desc" style={{ color: '#fff', fontSize: '0.95rem' }}>{step.description}</span>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.8rem', color: '#888', marginTop: '4px' }}>
+                                                                <IconTool />
+                                                                <span className="ne-step-tool-name" style={{ fontFamily: 'monospace', background: 'rgba(255,255,255,0.1)', padding: '2px 6px', borderRadius: '4px' }}>
+                                                                    {step.tool.server}/{step.tool.name}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                            <div className="ne-approval-actions">
+                                                <button
+                                                    className="ne-btn-reject"
+                                                    onClick={() => handlePlanApproval(false)}
+                                                >
+                                                    Abort Mission
+                                                </button>
+                                                <button
+                                                    className="ne-btn-approve"
+                                                    onClick={() => handlePlanApproval(true)}
+                                                >
+                                                    Approve & Execute
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="ne-approval-backdrop" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
 
                         {/* Quick Prompts */}
                         {!currentWorkflow && (
@@ -658,8 +703,8 @@ const NeuralEngine = () => {
                     <span className="ne-footer__sep">•</span>
                     <span>{TOOLS.length} Tools Available</span>
                 </motion.footer>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 
